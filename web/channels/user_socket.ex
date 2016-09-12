@@ -2,7 +2,7 @@ defmodule FamilyFeud.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", FamilyFeud.RoomChannel
+  channel "game:*", FamilyFeud.GameChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
