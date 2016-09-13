@@ -2,6 +2,7 @@ defmodule FamilyFeud.RegistrationController do
   use FamilyFeud.Web, :controller
   alias FamilyFeud.User
   alias FamilyFeud.Registration
+  alias FamilyFeud.Repo
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})
@@ -11,9 +12,10 @@ defmodule FamilyFeud.RegistrationController do
   def create(conn, %{"user" => user_params}) do
     changeset = User.changeset(%User{}, user_params)
 
-    case Registration.create(changeset, FamilyFeud.Repo) do
+    case Registration.create(changeset, Repo) do
       {:ok, changeset} ->
         conn
+        |> put_session(:current_user, changeset.id)
         |> put_flash(:info, "Your account was created")
         |> redirect to: "/"
       {:error, changeset} ->
@@ -22,5 +24,4 @@ defmodule FamilyFeud.RegistrationController do
         |> render :new, changeset: changeset
     end
   end
-
 end

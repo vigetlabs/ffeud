@@ -17,5 +17,9 @@ defmodule FamilyFeud.Router do
 
     resources "/registrations", RegistrationController,
       only: [:new, :create]
+
+    get  "/login",  SessionController, :new
+    post "/login",  SessionController, :create
+    get  "/logout", SessionController, :delete
   end
 end

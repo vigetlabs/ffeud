@@ -17,9 +17,15 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
-        <div>
-          <%= link "Register", to: registration_path(@conn, :new) %>
-        </div>
+        <ul>
+          <%= if logged_in?(@conn) do %>
+            <li><%= current_user(@conn).email %></li>
+            <li><%= link "Logout", to: session_path(@conn, :delete) %></li>
+          <% else %>
+            <li><%= link "Login", to: session_path(@conn, :new) %></li>
+            <li><%= link "Register", to: registration_path(@conn, :new) %></li>
+          <% end %>
+        </ul>
 
         <%= render @view_module, @view_template, assigns %>
       </main>
