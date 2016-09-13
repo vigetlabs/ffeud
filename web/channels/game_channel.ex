@@ -1,8 +1,8 @@
 defmodule FamilyFeud.GameChannel do
   use Phoenix.Channel
 
-  def join("game:lobby", _message, socket) do
-    IO.puts("join")
+  def join("game:lobby", %{"token" => token}, socket) do
+    socket = assign(socket, :user, token)
     {:ok, socket}
   end
 
@@ -14,7 +14,9 @@ defmodule FamilyFeud.GameChannel do
 
   intercept ["new_msg"]
   def handle_out("new_msg", payload, socket) do
-    push socket, "new_msg", payload
+    if socket.assigns[:user] == "public" do
+      push socket, "new_msg", payload
+    end
     {:noreply, socket}
   end
 end

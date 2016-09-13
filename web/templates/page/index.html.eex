@@ -2,3 +2,5 @@ Admin
 
 <div id="messages"></div>
 <input id="chat-input" type="text"></input>
+
+<span class="identifier" data-token="admin" />

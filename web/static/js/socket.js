@@ -5,11 +5,11 @@
 // and connect at the socket path in "lib/my_app/endpoint.ex":
 import {Socket} from "phoenix"
 
-let socket = new Socket("/socket", {params: {token: window.userToken}})
+let socket = new Socket("/socket")
 
 socket.connect()
 
-let channel = socket.channel("game:lobby", {})
+let channel = socket.channel("game:lobby", {token: $(".identifier").data("token")})
 
 let chatInput         = $("#chat-input")
 let messagesContainer = $("#messages")
