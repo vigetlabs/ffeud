@@ -3,6 +3,8 @@ defmodule FamilyFeud.SessionController do
   alias FamilyFeud.Session
   alias FamilyFeud.Repo
 
+  plug RequireLoggedOut, "before new and create" when action in [:new, :create]
+
   def new(conn, _params) do
     render conn, :new
   end
@@ -27,5 +29,4 @@ defmodule FamilyFeud.SessionController do
     |> put_flash(:info, "Logged out")
     |> redirect to: "/"
   end
-
 end

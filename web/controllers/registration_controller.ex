@@ -4,6 +4,8 @@ defmodule FamilyFeud.RegistrationController do
   alias FamilyFeud.Registration
   alias FamilyFeud.Repo
 
+  plug RequireLoggedOut, "before new and create" when action in [:new, :create]
+
   def new(conn, _params) do
     changeset = User.changeset(%User{})
     render conn, :new, changeset: changeset
