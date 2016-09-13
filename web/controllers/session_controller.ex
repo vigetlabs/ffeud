@@ -1,16 +1,15 @@
 defmodule FamilyFeud.SessionController do
   use FamilyFeud.Web, :controller
   alias FamilyFeud.Session
-  alias FamilyFeud.Repo
 
-  plug RequireLoggedOut, "before new and create" when action in [:new, :create]
+  plug FamilyFeud.RequireLoggedOut, "before new and create" when action in [:new, :create]
 
   def new(conn, _params) do
     render conn, :new
   end
 
   def create(conn, %{"session" => session_params}) do
-    case Session.login(session_params, Repo) do
+    case Session.login(session_params) do
       {:ok, user} ->
         conn
         |> put_session(:current_user, user.id)

@@ -7,7 +7,6 @@ defmodule FamilyFeud.GameChannel do
   end
 
   def handle_in("new_msg", %{"body" => body}, socket) do
-    IO.puts("handle_in")
     broadcast! socket, "new_msg", %{body: body}
     {:noreply, socket}
   end

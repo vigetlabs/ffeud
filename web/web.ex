@@ -53,7 +53,7 @@ defmodule FamilyFeud.Web do
       import FamilyFeud.ErrorHelpers
       import FamilyFeud.Gettext
 
-      import FamilyFeud.Session, only: [logged_in?: 1, current_user: 1]
+      import FamilyFeud.ApplicationHelper
     end
   end
 
