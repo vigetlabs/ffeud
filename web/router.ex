@@ -14,5 +14,8 @@ defmodule FamilyFeud.Router do
 
     get "/",       PageController, :index
     get "/public", PageController, :public
+
+    resources "/registrations", RegistrationController,
+      only: [:new, :create]
   end
 end
