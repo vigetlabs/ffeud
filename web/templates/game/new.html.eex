@@ -1,0 +1,13 @@
+<h1>New Game</h1>
+
+<%= form_for @conn, game_path(@conn, :create), [name: :game], fn f -> %>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <%= text_input f, :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Create", class: "btn btn-primary" %>
+    <%= link "Cancel", to: game_path(@conn, :index), class: "btn btn-default" %>
+  </div>
+<% end %>

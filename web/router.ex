@@ -14,6 +14,8 @@ defmodule FamilyFeud.Router do
 
     get "/", HomeController, :index
 
+    resources "/games", GameController
+
     resources "/registrations", RegistrationController,
       only: [:new, :create]
 

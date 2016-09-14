@@ -1,0 +1,17 @@
+<h1>Games</h1>
+
+<%= if Enum.empty? @games do %>
+  <p>
+    Looks like you haven't created any games yet.
+  </p>
+<% else %>
+  <ul>
+    <%= @games |> Enum.map fn game -> %>
+      <li><%= link game.name, to: game_path(@conn, :show, game.id) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<p>
+  <%= link "Create a new game", to: game_path(@conn, :new) %>
+</p>

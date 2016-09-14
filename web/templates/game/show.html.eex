@@ -1,0 +1,4 @@
+<h1><%= @game.name %></h1>
+
+<%= link "Back", to: game_path(@conn, :index), class: "btn btn-default" %>
+<%= link "Delete", to: game_path(@conn, :delete, @game), method: :delete, class: "btn btn-danger" %>
