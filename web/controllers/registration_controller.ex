@@ -18,11 +18,11 @@ defmodule FamilyFeud.RegistrationController do
         conn
         |> put_session(:current_user, changeset.id)
         |> put_flash(:info, "Your account was created")
-        |> redirect to: "/"
+        |> redirect(to: "/")
       {:error, changeset} ->
         conn
         |> put_flash(:error, "Unable to create account")
-        |> render :new, changeset: changeset
+        |> render(:new, changeset: changeset)
     end
   end
 end

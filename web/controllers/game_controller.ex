@@ -18,20 +18,20 @@ defmodule FamilyFeud.GameController do
     render conn, :show, game: Repo.get(Game, game_id)
   end
 
-  def new(conn, params) do
+  def new(conn, _params) do
     render conn, :new
   end
 
   def create(conn, %{"game" => game_params}) do
     case Game.create(game_params, current_user(conn)) do
-      {:ok, game} ->
+      {:ok, _game} ->
         conn
         |> put_flash(:info, "Game created")
-        |> redirect to: game_path(conn, :index)
+        |> redirect(to: game_path(conn, :index))
       :error ->
         conn
         |> put_flash(:info, "Wrong email or password")
-        |> render :new
+        |> render(:new)
     end
   end
 
@@ -41,7 +41,7 @@ defmodule FamilyFeud.GameController do
 
     conn
     |> put_flash(:info, game.name <> " deleted")
-    |> redirect to: game_path(conn, :index)
+    |> redirect(to: game_path(conn, :index))
   end
 
   def authorize_access(conn, _) do
@@ -51,7 +51,7 @@ defmodule FamilyFeud.GameController do
     else
       conn
       |> put_flash(:info, "You don't have access to that Game.")
-      |> redirect to: "/"
+      |> redirect(to: "/")
     end
   end
 

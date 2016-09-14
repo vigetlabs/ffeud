@@ -14,11 +14,11 @@ defmodule FamilyFeud.SessionController do
         conn
         |> put_session(:current_user, user.id)
         |> put_flash(:info, "Logged in")
-        |> redirect to: "/"
+        |> redirect(to: "/")
       :error ->
         conn
         |> put_flash(:info, "Wrong email or password")
-        |> render :new
+        |> render(:new)
     end
   end
 
@@ -26,6 +26,6 @@ defmodule FamilyFeud.SessionController do
     conn
     |> delete_session(:current_user)
     |> put_flash(:info, "Logged out")
-    |> redirect to: "/"
+    |> redirect(to: "/")
   end
 end

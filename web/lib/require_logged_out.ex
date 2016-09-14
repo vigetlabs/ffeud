@@ -8,7 +8,7 @@ defmodule FamilyFeud.RequireLoggedOut do
     if FamilyFeud.ApplicationHelper.logged_in?(conn) do
       conn
       |> put_flash(:info, "You're already logged in.")
-      |> redirect to: "/"
+      |> redirect(to: "/")
     else
       conn
     end

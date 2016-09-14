@@ -8,7 +8,7 @@ defmodule FamilyFeud.RequireLoggedIn do
     if !FamilyFeud.ApplicationHelper.logged_in?(conn) do
       conn
       |> put_flash(:info, "You must be logged in to view that page.")
-      |> redirect to: "/"
+      |> redirect(to: "/")
     else
       conn
     end
