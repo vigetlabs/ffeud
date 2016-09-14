@@ -5,8 +5,8 @@ defmodule FamilyFeud.RoundController do
 
   plug FamilyFeud.RequireLoggedIn
   plug :load_game
-  plug :authorize_game_access
-  plug :authorize_round_access, "_" when action in [:edit, :update, :delete]
+  plug :load_round, "_" when action in [:edit, :update, :delete]
+  plug :authorize_access
 
   def new(conn, _params) do
     render conn, :new
@@ -58,10 +58,27 @@ defmodule FamilyFeud.RoundController do
     assign(conn, :game, game)
   end
 
-  def authorize_game_access(conn, _) do
-    game = conn.assigns[:game]
+  def load_round(conn, _) do
+    if conn.assigns[:game] do
+      round = Repo.get_by(Round, id: conn.params["id"], game_id: conn.assigns[:game].id)
+      assign(conn, :round, round)
+    else
+      conn
+    end
+  end
 
-    if game && game.user_id == current_user(conn).id do
+  def authorize_access(conn, _) do
+    game   = conn.assigns[:game]
+    round  = conn.assigns[:round]
+    action = conn.private[:phoenix_action]
+
+    access = if Enum.member?([:edit, :update, :delete], action) do
+      game && round
+    else
+      game
+    end
+
+    if access do
       conn
     else
       conn
@@ -69,18 +86,4 @@ defmodule FamilyFeud.RoundController do
       |> redirect(to: "/")
     end
   end
-
-  def authorize_round_access(conn, _) do
-    game  = conn.assigns[:game]
-    round = Repo.get_by(Round, id: conn.params["id"], game_id: conn.params["game_id"])
-
-    if game && round do
-      conn
-    else
-      conn
-      |> put_flash(:info, "You don't have access to that.")
-      |> redirect(to: "/")
-    end
-  end
-
 end

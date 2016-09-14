@@ -1,3 +1,4 @@
+require IEx
 defmodule FamilyFeud.AnswerController do
   use FamilyFeud.Web, :controller
   alias FamilyFeud.Game
@@ -7,8 +8,8 @@ defmodule FamilyFeud.AnswerController do
   plug FamilyFeud.RequireLoggedIn
   plug :load_game
   plug :load_round
-  plug :authorize_round_access
-  plug :authorize_answer_access, "_" when action in [:edit, :update, :delete]
+  plug :load_answer, "_" when action in [:edit, :update, :delete]
+  plug :authorize_access
 
   def new(conn, _params) do
     render conn, :new
@@ -61,27 +62,36 @@ defmodule FamilyFeud.AnswerController do
   end
 
   def load_round(conn, _) do
-    round = Repo.get_by(Round, id: conn.params["round_id"], game_id: conn.params["game_id"])
-    assign(conn, :round, round)
-  end
-
-  def authorize_round_access(conn, _) do
-    game  = conn.assigns[:game]
-    round = conn.assigns[:round]
-
-    if game && round && game.user_id == current_user(conn).id do
-      conn
+    if conn.assigns[:game] do
+      round = Repo.get_by(Round, id: conn.params["round_id"], game_id: conn.assigns[:game].id)
+      assign(conn, :round, round)
     else
       conn
-      |> put_flash(:info, "You don't have access to that.")
-      |> redirect(to: "/")
     end
   end
 
-  def authorize_answer_access(conn, _) do
-    answer = Repo.get_by(Answer, id: conn.params["id"], round_id: conn.params["round_id"])
+  def load_answer(conn, _) do
+    if conn.assigns[:round] do
+      answer = Repo.get_by(Answer, id: conn.params["id"], round_id: conn.assigns[:round].id)
+      assign(conn, :answer, answer)
+    else
+      conn
+    end
+  end
 
-    if answer do
+  def authorize_access(conn, _) do
+    game   = conn.assigns[:game]
+    round  = conn.assigns[:round]
+    answer = conn.assigns[:answer]
+    action = conn.private[:phoenix_action]
+
+    access = if Enum.member?([:edit, :update, :delete], action) do
+      game && round && answer
+    else
+      game && round
+    end
+
+    if access do
       conn
     else
       conn
