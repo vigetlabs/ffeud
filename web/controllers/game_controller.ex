@@ -1,17 +1,13 @@
 defmodule FamilyFeud.GameController do
   use FamilyFeud.Web, :controller
-  import FamilyFeud.ApplicationHelper, only: [current_user: 1]
-
-  alias FamilyFeud.Repo
   alias FamilyFeud.Game
 
   plug FamilyFeud.RequireLoggedIn
   plug :authorize_access, "before show and delete" when action in [:show, :delete]
 
   def index(conn, _params) do
-    user = current_user(conn) |> Repo.preload(:games)
-
-    render conn, :index, games: user.games
+    render conn, :index,
+      games: Repo.all(assoc(current_user(conn), :games))
   end
 
   def show(conn, %{"id" => game_id}) do

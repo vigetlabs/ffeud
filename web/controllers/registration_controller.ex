@@ -1,7 +1,6 @@
 defmodule FamilyFeud.RegistrationController do
   use FamilyFeud.Web, :controller
   alias FamilyFeud.User
-  alias FamilyFeud.Registration
 
   plug FamilyFeud.RequireLoggedOut, "before new and create" when action in [:new, :create]
 

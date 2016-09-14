@@ -20,6 +20,8 @@ defmodule FamilyFeud.Web do
     quote do
       use Ecto.Schema
 
+      alias FamilyFeud.Repo
+
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
@@ -36,6 +38,8 @@ defmodule FamilyFeud.Web do
 
       import FamilyFeud.Router.Helpers
       import FamilyFeud.Gettext
+
+      import FamilyFeud.ApplicationHelper
     end
   end
 

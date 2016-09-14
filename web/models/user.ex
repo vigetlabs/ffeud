@@ -1,6 +1,5 @@
 defmodule FamilyFeud.User do
   use FamilyFeud.Web, :model
-  alias FamilyFeud.Repo
 
   schema "users" do
     field :email, :string

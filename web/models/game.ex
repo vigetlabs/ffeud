@@ -1,6 +1,5 @@
 defmodule FamilyFeud.Game do
   use FamilyFeud.Web, :model
-  alias FamilyFeud.Repo
   alias FamilyFeud.Game
 
   schema "games" do

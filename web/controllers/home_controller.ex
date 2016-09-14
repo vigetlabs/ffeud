@@ -2,7 +2,7 @@ defmodule FamilyFeud.HomeController do
   use FamilyFeud.Web, :controller
 
   def index(conn, _params) do
-    if FamilyFeud.ApplicationHelper.logged_in?(conn) do
+    if logged_in?(conn) do
       redirect conn, to: "/games"
     else
       render conn, :index
