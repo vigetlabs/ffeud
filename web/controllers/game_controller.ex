@@ -7,11 +7,15 @@ defmodule FamilyFeud.GameController do
 
   def index(conn, _params) do
     render conn, :index,
-      games: Repo.all(assoc(current_user(conn), :games))
+      games: assoc(current_user(conn), :games) |> Repo.all
   end
 
   def show(conn, %{"id" => game_id}) do
-    render conn, :show, game: Repo.get(Game, game_id)
+    game = Repo.get(Game, game_id)
+
+    render conn, :show,
+      game:   game,
+      rounds: Game.ordered_rounds(game)
   end
 
   def new(conn, _params) do
@@ -26,7 +30,7 @@ defmodule FamilyFeud.GameController do
         |> redirect(to: game_path(conn, :index))
       :error ->
         conn
-        |> put_flash(:info, "Wrong email or password")
+        |> put_flash(:info, "Something went wrong with that.")
         |> render(:new)
     end
   end

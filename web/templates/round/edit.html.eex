@@ -1,0 +1,21 @@
+<h1>Edit Round</h1>
+
+<%= form_for @conn, game_round_path(@conn, :update, @game.id, @round.id), [name: :round, method: :put], fn f -> %>
+  <div class="form-group">
+    <label for="question">Prompt</label>
+    <%= text_input f, :question, value: @round.question, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label for="position">Position</label>
+    <%= number_input f, :position, value: @round.position, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Update", class: "btn btn-primary" %>
+    <%= link "Cancel", to: game_path(@conn, :show, @game), class: "btn btn-default" %>
+  </div>
+
+<% end %>
+
+<%= link "Delete", to: game_round_path(@conn, :delete, @game, @round), method: :delete, data: [confirm: "Are you sure you want to delete this Round?"], class: "btn btn-danger" %>

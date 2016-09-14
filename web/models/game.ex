@@ -1,10 +1,12 @@
 defmodule FamilyFeud.Game do
   use FamilyFeud.Web, :model
   alias FamilyFeud.Game
+  alias FamilyFeud.Round
 
   schema "games" do
     field :name, :string
     belongs_to :user, FamilyFeud.User
+    has_many :rounds, FamilyFeud.Round
 
     timestamps()
   end
@@ -20,5 +22,13 @@ defmodule FamilyFeud.Game do
     changeset = Game.changeset(%Game{}, params)
 
     Repo.insert(changeset)
+  end
+
+  def ordered_rounds(game) do
+    query = from r in Round,
+      where:    r.game_id == ^game.id,
+      order_by: r.position
+
+    Repo.all query
   end
 end
