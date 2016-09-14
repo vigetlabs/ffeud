@@ -5,6 +5,9 @@ defmodule FamilyFeud.GameController do
   alias FamilyFeud.Repo
   alias FamilyFeud.Game
 
+  plug FamilyFeud.RequireLoggedIn
+  plug :authorize_access, "before show and delete" when action in [:show, :delete]
+
   def index(conn, _params) do
     render conn, :index,
       games: Game.for_user(current_user(conn))
@@ -38,6 +41,17 @@ defmodule FamilyFeud.GameController do
     conn
     |> put_flash(:info, game.name <> " deleted")
     |> redirect to: game_path(conn, :index)
+  end
+
+  def authorize_access(conn, _) do
+    game = Repo.get(Game, conn.params["id"])
+    if game && game.user_id == current_user(conn).id do
+      conn
+    else
+      conn
+      |> put_flash(:info, "You don't have access to that Game.")
+      |> redirect to: "/"
+    end
   end
 
 end
