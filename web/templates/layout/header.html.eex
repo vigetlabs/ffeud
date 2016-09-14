@@ -1,0 +1,13 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav navbar-right">
+      <%= if logged_in?(@conn) do %>
+        <li><%= link "Logout", to: session_path(@conn, :delete) %></li>
+        <li><%= link current_user(@conn).email, to: "/" %></li>
+      <% else %>
+        <li><%= link "Login", to: session_path(@conn, :new) %></li>
+        <li><%= link "Register", to: registration_path(@conn, :new) %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

@@ -12,8 +12,7 @@ defmodule FamilyFeud.Router do
   scope "/", FamilyFeud do
     pipe_through :browser
 
-    get "/",       PageController, :index
-    get "/public", PageController, :public
+    get "/", HomeController, :index
 
     resources "/registrations", RegistrationController,
       only: [:new, :create]

@@ -12,16 +12,16 @@
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
-import {Socket} from "phoenix"
-import React    from "react"
-import ReactDOM from "react-dom"
-import Messages from "./components/messages.js"
-
-let socket = new Socket("/socket")
-socket.connect()
-let channel = socket.channel("game:lobby", {token: $(".identifier").data("token")})
-
-ReactDOM.render(
-  <Messages channel={channel}/>,
-  document.getElementById("messages")
-)
+// import {Socket} from "phoenix"
+// import React    from "react"
+// import ReactDOM from "react-dom"
+// import Messages from "./components/messages.js"
+//
+// let socket = new Socket("/socket")
+// socket.connect()
+// let channel = socket.channel("game:lobby", {token: $(".identifier").data("token")})
+//
+// ReactDOM.render(
+//   <Messages channel={channel}/>,
+//   document.getElementById("messages")
+// )
