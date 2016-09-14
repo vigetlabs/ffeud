@@ -22,15 +22,4 @@ defmodule FamilyFeud.Game do
 
     Repo.insert(changeset)
   end
-
-  def for_user(user) do
-    game_ids = Repo.all(
-      from g in "games",
-      where: g.user_id == ^user.id,
-      select: g.id)
-
-    Enum.map game_ids, fn(id) ->
-      Repo.get(Game, id) |> Repo.preload(:user)
-    end
-  end
 end

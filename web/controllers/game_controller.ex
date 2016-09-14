@@ -9,8 +9,9 @@ defmodule FamilyFeud.GameController do
   plug :authorize_access, "before show and delete" when action in [:show, :delete]
 
   def index(conn, _params) do
-    render conn, :index,
-      games: Game.for_user(current_user(conn))
+    user = current_user(conn) |> Repo.preload(:games)
+
+    render conn, :index, games: user.games
   end
 
   def show(conn, %{"id" => game_id}) do
