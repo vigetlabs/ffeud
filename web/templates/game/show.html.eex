@@ -8,9 +8,27 @@
   <ul>
     <%= @rounds |> Enum.map fn round -> %>
       <li>
-        <%= round.question %>
-        <%= link "Edit", to: game_round_path(@conn, :edit, @game.id, round.id) %>
+        <div>
+          <%= round.question %> (<%= link "Edit", to: game_round_path(@conn, :edit, @game, round) %>)
+        </div>
+        <div style="margin-bottom: 20px;">
+          <b>Answers:</b>
+          <%= if Enum.any? Round.ordered_answers(round) do %>
+            <ul class="no-margin">
+              <%= Round.ordered_answers(round) |> Enum.map fn answer -> %>
+                <li>
+                  <%= answer.body %> (<%= answer.points %>)
+                  (<%= link "Edit", to: game_round_answer_path(@conn, :edit, @game, round, answer) %>)
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
       </li>
+      <div>
+        <%= link "Add Answer", to: game_round_answer_path(@conn, :new, @game, round), class: "btn btn-sm btn-default" %>
+      </div>
+      <br>
     <% end %>
   </ul>
 <% end %>

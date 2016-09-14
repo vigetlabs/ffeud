@@ -1,6 +1,6 @@
 <h1>Edit Round</h1>
 
-<%= form_for @conn, game_round_path(@conn, :update, @game.id, @round.id), [name: :round, method: :put], fn f -> %>
+<%= form_for @conn, game_round_path(@conn, :update, @game, @round), [name: :round, method: :put], fn f -> %>
   <div class="form-group">
     <label for="question">Prompt</label>
     <%= text_input f, :question, value: @round.question, class: "form-control" %>

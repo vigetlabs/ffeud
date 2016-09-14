@@ -28,7 +28,7 @@ defmodule FamilyFeud.GameController do
         conn
         |> put_flash(:info, "Game created")
         |> redirect(to: game_path(conn, :index))
-      :error ->
+      {:error, _changeset} ->
         conn
         |> put_flash(:info, "Something went wrong with that.")
         |> render(:new)
@@ -50,7 +50,7 @@ defmodule FamilyFeud.GameController do
       conn
     else
       conn
-      |> put_flash(:info, "You don't have access to that Game.")
+      |> put_flash(:info, "You don't have access to that.")
       |> redirect(to: "/")
     end
   end

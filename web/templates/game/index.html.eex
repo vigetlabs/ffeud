@@ -12,6 +12,6 @@
   </ul>
 <% end %>
 
-<p>
+<div>
   <%= link "Create a new game", to: game_path(@conn, :new) %>
-</p>
+</div>

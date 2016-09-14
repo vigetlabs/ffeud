@@ -8,7 +8,7 @@ defmodule FamilyFeud.RoundController do
   plug :authorize_game_access
   plug :authorize_round_access, "_" when action in [:edit, :update, :delete]
 
-  def new(conn, params) do
+  def new(conn, _params) do
     render conn, :new
   end
 
@@ -18,7 +18,7 @@ defmodule FamilyFeud.RoundController do
         conn
         |> put_flash(:info, "Round created")
         |> redirect(to: game_path(conn, :show, params["game_id"]))
-      :error ->
+      {:error, _changeset} ->
         conn
         |> put_flash(:info, "Something went wrong with that")
         |> render(:new)
@@ -40,7 +40,7 @@ defmodule FamilyFeud.RoundController do
       {:error, _changeset} ->
         conn
         |> put_flash(:info, "Something went wrong with that")
-        |> render(:edit)
+        |> render(:edit, round: round)
     end
   end
 
@@ -54,29 +54,31 @@ defmodule FamilyFeud.RoundController do
   end
 
   def load_game(conn, _) do
-    game = Repo.get(Game, conn.params["game_id"])
+    game = Repo.get_by(Game, id: conn.params["game_id"], user_id: current_user(conn).id)
     assign(conn, :game, game)
   end
 
   def authorize_game_access(conn, _) do
-    game = Repo.get(Game, conn.params["game_id"])
+    game = conn.assigns[:game]
+
     if game && game.user_id == current_user(conn).id do
       conn
     else
       conn
-      |> put_flash(:info, "You don't have access to that Game.")
+      |> put_flash(:info, "You don't have access to that.")
       |> redirect(to: "/")
     end
   end
 
   def authorize_round_access(conn, _) do
-    round = Repo.get_by(Round, id: conn.params["id"], game_id: conn.assigns[:game].id)
+    game  = conn.assigns[:game]
+    round = Repo.get_by(Round, id: conn.params["id"], game_id: conn.params["game_id"])
 
-    if round do
+    if game && round do
       conn
     else
       conn
-      |> put_flash(:info, "You don't have access to that Round.")
+      |> put_flash(:info, "You don't have access to that.")
       |> redirect(to: "/")
     end
   end
