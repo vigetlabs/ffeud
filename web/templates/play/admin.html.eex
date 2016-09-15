@@ -5,4 +5,3 @@
 </div>
 
 <div id="socket-app" data-identifier="admin" data-game="<%= @game.id %>"></div>
-<button id="reload-state">Reload</button>

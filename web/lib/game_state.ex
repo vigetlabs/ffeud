@@ -12,6 +12,7 @@ defmodule FamilyFeud.GameState do
       |> Repo.preload(:answers)
 
     %{
+      access:       access,
       pot:          active_game.pot,
       team_1_score: active_game.team_1_score,
       team_2_score: active_game.team_2_score,

@@ -3,6 +3,7 @@ defmodule FamilyFeud.GameChannel do
   alias FamilyFeud.Repo
   alias FamilyFeud.Game
   alias FamilyFeud.GameState
+  alias FamilyFeud.ActionHandler
 
   def join("game:" <> game_id, %{"token" => token}, socket) do
     socket = assign(socket, :user, token)
@@ -11,8 +12,24 @@ defmodule FamilyFeud.GameChannel do
     {:ok, socket}
   end
 
-  def handle_in("update_state", _params, socket) do
+  def handle_in("load_state", _params, socket) do
+    push socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
+    {:noreply, socket}
+  end
+
+  def handle_in("act", params = %{"action" => action}, socket) do
+    ActionHandler.handle(action, socket.assigns[:game], params)
+    broadcast_state(socket)
+    {:noreply, socket}
+  end
+
+  def broadcast_state(socket) do
     broadcast! socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
+  end
+
+  intercept ["state"]
+  def handle_out("state", packet, socket) do
+    push socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
     {:noreply, socket}
   end
 end

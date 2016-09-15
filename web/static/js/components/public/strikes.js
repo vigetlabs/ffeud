@@ -18,7 +18,9 @@ let Strikes = React.createClass({
   },
 
   class_for(i) {
-    return i <= this.props.round_info.x_count ? "on" : "off"
+    let on_off = i <= this.props.round_info.x_count ? "on" : "off"
+
+    return "strike strike-" + on_off
   }
 })
 

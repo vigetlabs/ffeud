@@ -26,7 +26,7 @@ let PublicApp = React.createClass({
     this.props.channel.join()
       .receive("ok", resp => {
         console.log("Public join success", resp)
-        this.props.channel.push("update_state")
+        this.props.channel.push("load_state")
       })
       .receive("error", resp => { console.log("Public join fail", resp) })
   },
