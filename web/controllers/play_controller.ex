@@ -1,11 +1,15 @@
 defmodule FamilyFeud.PlayController do
   use FamilyFeud.Web, :controller
   alias FamilyFeud.Game
+  alias FamilyFeud.ActiveGame
 
   plug :load_game
   plug :authorize_access, "before admin" when action in [:admin]
 
   def admin(conn, _params) do
+    active_game = Game.get_active_game(conn.assigns[:game])
+    ActiveGame.get_active_round(active_game)
+
     render conn, :admin
   end
 

@@ -1,4 +1,4 @@
 <h1><%= @game.name %>: Public View</h1>
 
-<div id="socket-app" data-identifier="admin" data-game="<%= @game.id %>"></div>
+<div id="socket-app" data-identifier="public" data-game="<%= @game.id %>"></div>
 <input id="chat-input">

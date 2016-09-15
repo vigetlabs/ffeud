@@ -6,6 +6,7 @@ defmodule FamilyFeud.Game do
     field :public_code, :string
     belongs_to :user, User
     has_many :rounds, Round
+    has_many :active_games, ActiveGame
 
     timestamps()
   end
@@ -22,6 +23,25 @@ defmodule FamilyFeud.Game do
     changeset = Game.changeset(%Game{}, params)
 
     Repo.insert(changeset)
+  end
+
+  def get_active_game(game) do
+    active_game = Repo.get_by(ActiveGame, game_id: game.id, active: true)
+
+    if !active_game do
+      ActiveGame.create(game)
+    end
+
+    Repo.get_by(ActiveGame, game_id: game.id, active: true)
+  end
+
+  def first_round(game) do
+    query = from r in Round,
+      where:    r.game_id == ^game.id,
+      order_by: r.position,
+      limit:    1
+
+    Repo.all(query) |> List.first
   end
 
   def ordered_rounds(game) do

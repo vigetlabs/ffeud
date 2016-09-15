@@ -27,6 +27,10 @@ let Messages = React.createClass({
       })
     })
 
+    this.props.channel.on("state", payload => {
+      console.log(payload)
+    })
+
     this.props.channel.join()
       .receive("ok", resp => { console.log("Joined successfully", resp) })
       .receive("error", resp => { console.log("Unable to join", resp) })
