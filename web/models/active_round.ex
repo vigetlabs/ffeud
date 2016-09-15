@@ -27,49 +27,4 @@ defmodule FamilyFeud.ActiveRound do
     })
     |> Repo.insert
   end
-
-  def get_state(active_round, access) do
-    round = Repo.get(Round, active_round.round_id) |> Repo.preload(:answers)
-
-    %{
-      question: round.question,
-      x_count:  active_round.x_count,
-      answers:  get_answers(round, active_round, access)
-    }
-  end
-
-  def get_answers(round, active_round, "admin") do
-    answers = Round.ordered_answers(round)
-
-    answers |> Enum.map fn(answer) ->
-      index = Enum.find_index(answers, fn(x) -> x == answer end)
-
-      %{
-        body:   answer.body,
-        points: answer.points,
-        used:   Enum.at(active_round.answer_state, index)
-      }
-    end
-  end
-
-  def get_answers(round, active_round, "public") do
-    answers = Round.ordered_answers(round)
-
-    answers |> Enum.map fn(answer) ->
-      index = Enum.find_index(answers, fn(x) -> x == answer end)
-
-      if Enum.at(active_round.answer_state, index) do
-        %{
-          used:   true,
-          body:   answer.body,
-          points: answer.points
-        }
-      else
-        %{
-          used:  false,
-          index: index + 1
-        }
-      end
-    end
-  end
 end

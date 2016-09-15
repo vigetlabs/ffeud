@@ -1,7 +1,7 @@
 import React   from "react"
 import Message from "./message.js"
 
-let Messages = React.createClass({
+let Feud = React.createClass({
   getInitialState() {
     return {
       messages: []
@@ -49,4 +49,4 @@ let Messages = React.createClass({
   }
 })
 
-export default Messages
+export default Feud

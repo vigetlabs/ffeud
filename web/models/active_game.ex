@@ -21,17 +21,6 @@ defmodule FamilyFeud.ActiveGame do
     changeset(%ActiveGame{}, %{game_id: game.id}) |> Repo.insert
   end
 
-  def get_state(active_game, access) do
-    active_round = get_active_round(active_game)
-
-    %{
-      pot:          active_game.pot,
-      team_1_score: active_game.team_1_score,
-      team_2_score: active_game.team_2_score,
-      round_info:   ActiveRound.get_state(active_round, access)
-    }
-  end
-
   def get_active_round(active_game) do
     game         = Repo.get(Game, active_game.game_id)
     active_round = Repo.get_by(ActiveRound, active_game_id: active_game.id, active: true)

@@ -35,7 +35,9 @@
 
 <div style="margin-bottom: 10px;">
   <%= link "Add a Round", to: game_round_path(@conn, :new, @game), class: "btn btn-default" %>
-  <%= link "Play!", to: game_play_path(@conn, :admin, @game), class: "btn btn-success" %>
+  <%= if Enum.any? @rounds do %>
+    <%= link "Play!", to: game_play_path(@conn, :admin, @game), class: "btn btn-success" %>
+  <% end %>
 </div>
 
 <div>
