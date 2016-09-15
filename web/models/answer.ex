@@ -20,9 +20,4 @@ defmodule FamilyFeud.Answer do
 
     changeset(%Answer{}, params) |> Repo.insert
   end
-
-  def update(answer, params) do
-    changeset(answer, params) |> Repo.update
-  end
-
 end

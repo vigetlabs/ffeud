@@ -31,6 +31,10 @@ defmodule FamilyFeud.Web do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+
+      def update(resource, params) do
+        changeset(resource, params) |> Repo.update
+      end
     end
   end
 

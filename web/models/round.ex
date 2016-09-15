@@ -22,14 +22,10 @@ defmodule FamilyFeud.Round do
     changeset(%Round{}, params) |> Repo.insert
   end
 
-  def update(round, params) do
-    changeset(round, params) |> Repo.update
-  end
-
   def ordered_answers(round) do
     query = from a in Answer,
       where:    a.round_id == ^round.id,
-      order_by: [desc: a.points]
+      order_by: [desc: a.points, asc: a.body]
 
     Repo.all query
   end
