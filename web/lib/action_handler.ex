@@ -1,17 +1,17 @@
 defmodule FamilyFeud.ActionHandler do
-  alias FamilyFeud.Actions.UseAnswer
-  alias FamilyFeud.Actions.AddStrike
-  alias FamilyFeud.Actions.DolePoints
-
   def handle("use_answer", game, %{"index" => index}) do
-    UseAnswer.act(game, index)
+    FamilyFeud.Actions.UseAnswer.act(game, index)
   end
 
   def handle("add_strike", game, _params) do
-    AddStrike.act(game)
+    FamilyFeud.Actions.AddStrike.act(game)
   end
 
   def handle("dole_points", game, %{"team" => team}) do
-    DolePoints.act(game, team)
+    FamilyFeud.Actions.DolePoints.act(game, team)
+  end
+
+  def handle("next_round", game, _params) do
+    FamilyFeud.Actions.NextRound.act(game)
   end
 end

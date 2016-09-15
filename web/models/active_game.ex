@@ -21,12 +21,12 @@ defmodule FamilyFeud.ActiveGame do
     changeset(%ActiveGame{}, %{game_id: game.id}) |> Repo.insert
   end
 
-  def get_active_round(active_game) do
+  def get_active_round(active_game, round \\ nil) do
     game         = Repo.get(Game, active_game.game_id)
     active_round = Repo.get_by(ActiveRound, active_game_id: active_game.id, active: true)
 
     if !active_round do
-      ActiveRound.create(active_game, Game.first_round(game))
+      ActiveRound.create(active_game, round || Game.first_round(game))
     end
 
     Repo.get_by(ActiveRound, active_game_id: active_game.id, active: true)

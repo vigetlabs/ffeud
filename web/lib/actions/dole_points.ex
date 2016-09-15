@@ -4,12 +4,14 @@ defmodule FamilyFeud.Actions.DolePoints do
 
   def act(game, team) do
     active_game = active_game_for(game)
+
     game_params = case team do
     1 ->
       %{team_1_score: active_game.team_1_score + active_game.pot, pot: 0}
     2 ->
       %{team_2_score: active_game.team_2_score + active_game.pot, pot: 0}
     end
+
     ActiveGame.update(active_game, game_params)
   end
 
