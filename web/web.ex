@@ -22,6 +22,9 @@ defmodule FamilyFeud.Web do
       use Ecto.Schema
 
       alias FamilyFeud.Repo
+      alias FamilyFeud.Game
+      alias FamilyFeud.Round
+      alias FamilyFeud.Answer
 
       import Ecto
       import Ecto.Changeset

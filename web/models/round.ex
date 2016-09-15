@@ -1,13 +1,11 @@
 defmodule FamilyFeud.Round do
   use FamilyFeud.Web, :model
-  alias FamilyFeud.Round
-  alias FamilyFeud.Answer
 
   schema "rounds" do
     field :question, :string
     field :position, :integer
-    belongs_to :game, FamilyFeud.Game
-    has_many :answers, FamilyFeud.Answer
+    belongs_to :game, Game
+    has_many :answers, Answer
 
     timestamps()
   end

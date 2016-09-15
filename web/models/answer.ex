@@ -1,11 +1,10 @@
 defmodule FamilyFeud.Answer do
   use FamilyFeud.Web, :model
-  alias FamilyFeud.Answer
 
   schema "answers" do
     field :body, :string
     field :points, :integer
-    belongs_to :round, FamilyFeud.Round
+    belongs_to :round, Round
 
     timestamps()
   end
