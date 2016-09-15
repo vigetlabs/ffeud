@@ -13,7 +13,10 @@ let AdminApp = React.createClass({
     })
 
     this.props.channel.join()
-      .receive("ok", resp => { console.log("Admin join success", resp) })
+      .receive("ok", resp => {
+        console.log("Admin join success", resp)
+        this.props.channel.push("update_state")
+      })
       .receive("error", resp => { console.log("Admin join fail", resp) })
   },
 

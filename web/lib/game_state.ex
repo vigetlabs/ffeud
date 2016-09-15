@@ -23,36 +23,21 @@ defmodule FamilyFeud.GameState do
     }
   end
 
-  def get_answers(round, active_round, "admin") do
+  def get_answers(round, active_round, access) do
     answers = Round.ordered_answers(round)
 
     answers |> Enum.map fn(answer) ->
       index = Enum.find_index(answers, fn(x) -> x == answer end)
 
-      %{
-        body:   answer.body,
-        points: answer.points,
-        used:   Enum.at(active_round.answer_state, index)
-      }
-    end
-  end
-
-  def get_answers(round, active_round, "public") do
-    answers = Round.ordered_answers(round)
-
-    answers |> Enum.map fn(answer) ->
-      index = Enum.find_index(answers, fn(x) -> x == answer end)
-
-      if Enum.at(active_round.answer_state, index) do
+      if access == "admin" || Enum.at(active_round.answer_state, index) do
         %{
-          used:   true,
           body:   answer.body,
-          points: answer.points
+          points: answer.points,
+          used:   Enum.at(active_round.answer_state, index)
         }
       else
         %{
-          used:  false,
-          index: index + 1
+          used: false
         }
       end
     end
