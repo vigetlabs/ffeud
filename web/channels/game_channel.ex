@@ -11,16 +11,8 @@ defmodule FamilyFeud.GameChannel do
     {:ok, socket}
   end
 
-  def handle_in("new_msg", %{"body" => body}, socket) do
-    broadcast! socket, "new_msg", %{body: body}
-    {:noreply, socket}
-  end
-
-  intercept ["new_msg"]
-  def handle_out("new_msg", payload, socket) do
-    push socket, "new_msg", payload
-    push socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
-
+  def handle_in("update_state", _params, socket) do
+    broadcast! socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
     {:noreply, socket}
   end
 end

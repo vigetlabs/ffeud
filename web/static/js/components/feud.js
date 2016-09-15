@@ -1,51 +1,13 @@
-import React   from "react"
-import Message from "./message.js"
+import React     from "react"
+import AdminApp  from "./admin_app"
+import PublicApp from "./public_app"
 
 let Feud = React.createClass({
-  getInitialState() {
-    return {
-      messages: []
-    }
-  },
-
-  componentDidMount() {
-    let chatInput = $("#chat-input")
-
-    chatInput.on("keypress", event => {
-      if (event.keyCode === 13) {
-        this.props.channel.push("new_msg", {body: chatInput.val()})
-        chatInput.val("")
-      }
-    })
-
-    this.props.channel.on("new_msg", payload => {
-      this.setState({
-        messages: this.state.messages.concat({
-          time: Date(),
-          body: payload.body
-        })
-      })
-    })
-
-    this.props.channel.on("state", payload => {
-      console.log(payload)
-    })
-
-    this.props.channel.join()
-      .receive("ok", resp => { console.log("Joined successfully", resp) })
-      .receive("error", resp => { console.log("Unable to join", resp) })
-  },
-
   render() {
-    return (
-      <ul>
-        {
-          this.state.messages.map(obj => {
-            return <Message { ...obj } key={ obj.time } />
-          })
-        }
-      </ul>
-    )
+    let { token, channel } = this.props
+
+    let App = token == "admin" ? AdminApp : PublicApp
+    return (<App channel={channel} />)
   }
 })
 

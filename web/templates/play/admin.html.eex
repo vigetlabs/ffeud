@@ -1,8 +1,8 @@
 <h1><%= @game.name %>: Admin View</h1>
 
 <div>
-  <%= link "Public Page: " <> @game.public_code, to: play_path(@conn, :public, @game.public_code) %>
+  <%= link "Public Page: " <> @game.public_code, to: play_path(@conn, :public, @game.public_code), target: :_blank %>
 </div>
 
 <div id="socket-app" data-identifier="admin" data-game="<%= @game.id %>"></div>
-<input id="chat-input">
+<button id="reload-state">Reload</button>
