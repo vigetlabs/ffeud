@@ -15,11 +15,16 @@ defmodule FamilyFeud.Actions.NextRound do
     round          = current_round_for(active_round)
     ordered_rounds = rounds_for(game)
 
-    round_index    = ordered_rounds |> Enum.find_index(fn(r) -> r == round end)
-    next_round     = ordered_rounds |> Enum.at(round_index + 1)
+    round_index = ordered_rounds |> Enum.find_index(fn(r) -> r == round end)
+    next_round  = ordered_rounds |> Enum.at(round_index + 1)
+    last_round  = List.last(ordered_rounds) == next_round
 
     ActiveRound.update(active_round, %{active: false})
-    ActiveGame.get_active_round(active_game, next_round)
+    new_active_round = ActiveGame.get_active_round(active_game, next_round)
+
+    if last_round do
+      ActiveRound.update(new_active_round, %{last_round: true})
+    end
   end
 
   def active_game_for(game) do

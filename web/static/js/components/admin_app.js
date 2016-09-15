@@ -11,11 +11,12 @@ let AdminApp = React.createClass({
       team_2_score: 0,
       pot: 0,
       round_info: {
-        question: "",
-        x_count:  0,
-        answers:  [],
-        rebuttal: false,
-        done:     false
+        question:   "",
+        x_count:    0,
+        answers:    [],
+        rebuttal:   false,
+        done:       false,
+        last_round: false
       }
     }
   },

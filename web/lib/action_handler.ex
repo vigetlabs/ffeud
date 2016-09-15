@@ -14,4 +14,8 @@ defmodule FamilyFeud.ActionHandler do
   def handle("next_round", game, _params) do
     FamilyFeud.Actions.NextRound.act(game)
   end
+
+  def handle("reset_game", game, _params) do
+    FamilyFeud.Actions.ResetGame.act(game)
+  end
 end

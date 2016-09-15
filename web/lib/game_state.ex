@@ -17,11 +17,12 @@ defmodule FamilyFeud.GameState do
       team_1_score: active_game.team_1_score,
       team_2_score: active_game.team_2_score,
       round_info:   %{
-        question: round.question,
-        x_count:  active_round.x_count,
-        rebuttal: active_round.rebuttal,
-        answers:  get_answers(round, active_round, access),
-        done:     round_done?(active_round)
+        question:   round.question,
+        x_count:    active_round.x_count,
+        rebuttal:   active_round.rebuttal,
+        answers:    get_answers(round, active_round, access),
+        done:       round_done?(active_round),
+        last_round: active_round.last_round
       }
     }
   end

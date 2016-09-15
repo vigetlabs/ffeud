@@ -2,10 +2,11 @@ defmodule FamilyFeud.ActiveRound do
   use FamilyFeud.Web, :model
 
   schema "active_rounds" do
-    field :active, :boolean, default: true
+    field :active,       :boolean, default: true
     field :answer_state, {:array, :boolean}, default: []
-    field :x_count, :integer, default: 0
-    field :rebuttal, :boolean, default: false
+    field :x_count,      :integer, default: 0
+    field :rebuttal,     :boolean, default: false
+    field :last_round,   :boolean, default: false
     belongs_to :active_game, ActiveGame
     belongs_to :round, Round
 
@@ -14,8 +15,8 @@ defmodule FamilyFeud.ActiveRound do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:active, :answer_state, :x_count, :rebuttal, :active_game_id, :round_id])
-    |> validate_required([:active, :answer_state, :x_count, :rebuttal, :active_game_id, :round_id])
+    |> cast(params, [:active, :answer_state, :x_count, :rebuttal, :last_round, :active_game_id, :round_id])
+    |> validate_required([:active, :answer_state, :x_count, :rebuttal, :last_round, :active_game_id, :round_id])
   end
 
   def create(active_game, round) do

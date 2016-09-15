@@ -20,7 +20,7 @@ let Actions = React.createClass({
       <div className="well">
         Round Over
         <hr />
-        { pot > 0 ? this.dole_points_prompt() : this.next_round_prompt() }
+        { pot > 0 ? this.dole_points_prompt() : this.round_over_prompt() }
       </div>
     )
   },
@@ -39,15 +39,26 @@ let Actions = React.createClass({
     )
   },
 
-  next_round_prompt() {
-    return (
-      <div>
-        Ready for the next round?
-        <a href="#" className="btn btn-sm btn-success btn-spacious" onClick={ this.next_round }>
-          Next Round
-        </a>
-      </div>
-    )
+  round_over_prompt() {
+    if (this.props.round_info.last_round) {
+      return (
+        <div>
+          That's all Folks!
+          <a href="#" className="btn btn-sm btn-success btn-spacious" onClick={ this.reset_game }>
+            Reset
+          </a>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          Ready for the next round?
+          <a href="#" className="btn btn-sm btn-success btn-spacious" onClick={ this.next_round }>
+            Next Round
+          </a>
+        </div>
+      )
+    }
   },
 
 
@@ -67,6 +78,11 @@ let Actions = React.createClass({
   next_round(e) {
     e.preventDefault()
     this.props.channel.push("act", { action: "next_round" })
+  },
+
+  reset_game(e) {
+    e.preventDefault()
+    this.props.channel.push("act", { action: "reset_game" })
   }
 })
 
