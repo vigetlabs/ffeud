@@ -15,7 +15,10 @@ defmodule FamilyFeud.Actions.UseAnswer do
     ActiveGame.update(active_game, %{pot: new_pot_value})
 
     new_answer_state = active_round.answer_state |> List.replace_at(index, true)
-    ActiveRound.update(active_round, %{answer_state: new_answer_state})
+    params           = %{answer_state: new_answer_state}
+    if active_round.rebuttal, do: params = Map.put(params, :rebuttal, false)
+
+    ActiveRound.update(active_round, params)
   end
 
   def active_game_for(game) do

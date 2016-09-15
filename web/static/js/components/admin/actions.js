@@ -2,11 +2,29 @@ import React from "react"
 
 let Actions = React.createClass({
   render() {
-    let { rebuttal } = this.props.round_info
+    let { done, rebuttal } = this.props.round_info
 
+    if (done) {
+      return this.done()
+    } else if (rebuttal) {
+      return this.rebuttal()
+    } else {
+      return null
+    }
+  },
+
+  done() {
     return (
       <div className="well">
-        Rebuttal: { rebuttal ? "True" : "False" }
+        Round Over
+      </div>
+    )
+  },
+
+  rebuttal() {
+    return (
+      <div className="well">
+        Rebuttal Time
       </div>
     )
   }

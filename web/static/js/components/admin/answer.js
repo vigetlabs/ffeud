@@ -2,19 +2,19 @@ import React from "react"
 
 let Answer = React.createClass({
   render() {
-    let { answer, index } = this.props
+    let { answer, index, done } = this.props
 
-    if (answer.used) {
+    if (answer.used || done) {
       return (
-        <span>
+        <div>
           { answer.body } ({ answer.points })
-        </span>
+        </div>
       )
     } else {
       return (
-        <span>
+        <div>
           { answer.body } ({ answer.points }) <a href="#" onClick={ (e) => this.use_answer(e, index) }>Use</a>
-        </span>
+        </div>
       )
     }
   },

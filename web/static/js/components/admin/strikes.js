@@ -2,11 +2,14 @@ import React from "react"
 
 let Strikes = React.createClass({
   render() {
+    let { rebuttal } = this.props.round_info
+
     return (
       <div className="well">
         { this.strike_for(1) }
         { this.strike_for(2) }
         { this.strike_for(3) }
+        { rebuttal ? this.rebuttal_strike() : null }
       </div>
     )
   },
@@ -25,6 +28,17 @@ let Strikes = React.createClass({
         </div>
       )
     }
+  },
+
+  rebuttal_strike() {
+    return (
+      <span>
+        + <a href="#" onClick={ this.add_strike } className="strike strike-link">
+          X
+        </a>
+      </span>
+
+    )
   },
 
   add_strike(e) {

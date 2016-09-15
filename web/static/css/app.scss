@@ -26,3 +26,9 @@
     }
   }
 }
+
+.answer {
+  &.answer-used {
+    color: grey;
+  }
+}

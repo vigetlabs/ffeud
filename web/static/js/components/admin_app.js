@@ -14,7 +14,8 @@ let AdminApp = React.createClass({
         question: "",
         x_count:  0,
         answers:  [],
-        rebuttal: false
+        rebuttal: false,
+        done:     false
       }
     }
   },

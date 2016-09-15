@@ -14,27 +14,35 @@ let Answers = React.createClass({
   },
 
   render_answers() {
-    let answers     = this.props.round_info.answers
-    let { channel } = this.props
+    let { round_info, channel } = this.props
+    let answers = round_info.answers
 
     return [0,1,2,3,4,5].map(function(index) {
       let answer = answers[index]
 
       if (answer) {
         return (
-          <li className="answer exists-true" key={ index }>
-            <Answer channel={ channel } answer={ answer } index={ index } />
+          <li className={ this.class_name(answer) } key={ index }>
+            <Answer channel={ channel } answer={ answer } index={ index } done={ round_info.done } />
           </li>
         )
       } else {
         return (
-          <li className="answer exists-false" key={ index }>
+          <li className={ this.class_name(answer) } key={ index }>
             { index + 1 }
           </li>
         )
       }
     }.bind(this))
-  }
+  },
+
+  class_name(answer) {
+    if (answer === undefined) {
+      return "answer no-answer"
+    } else {
+      return "answer answer-" + (answer.used ? "used" : "unused")
+    }
+  },
 })
 
 export default Answers

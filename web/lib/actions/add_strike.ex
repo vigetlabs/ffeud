@@ -8,9 +8,8 @@ defmodule FamilyFeud.Actions.AddStrike do
 
     new_x_count = active_round.x_count + 1
     params      = %{x_count: new_x_count}
-    if new_x_count == 3 do
-      params = Map.put(params, :rebuttal, true)
-    end
+    if new_x_count == 3,      do: params = Map.put(params, :rebuttal, true)
+    if active_round.rebuttal, do: params = Map.put(params, :rebuttal, false)
 
     ActiveRound.update(active_round, params)
   end

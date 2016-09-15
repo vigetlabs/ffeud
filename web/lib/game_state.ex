@@ -20,7 +20,8 @@ defmodule FamilyFeud.GameState do
         question: round.question,
         x_count:  active_round.x_count,
         rebuttal: active_round.rebuttal,
-        answers:  get_answers(round, active_round, access)
+        answers:  get_answers(round, active_round, access),
+        done:     round_done?(active_round)
       }
     }
   end
@@ -43,5 +44,12 @@ defmodule FamilyFeud.GameState do
         }
       end
     end
+  end
+
+  def round_done?(active_round) do
+    all_answered = Enum.all?(active_round.answer_state)
+    struck_out   = (active_round.x_count >= 3 && !active_round.rebuttal)
+
+    all_answered || struck_out
   end
 end
