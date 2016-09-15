@@ -1,8 +1,12 @@
 defmodule FamilyFeud.GameChannel do
   use Phoenix.Channel
+  alias FamilyFeud.Repo
+  alias FamilyFeud.Game
 
-  def join("game:lobby", %{"token" => token}, socket) do
+  def join("game:" <> game_id, %{"token" => token}, socket) do
     socket = assign(socket, :user, token)
+    socket = assign(socket, :game, Repo.get(Game, game_id))
+
     {:ok, socket}
   end
 
@@ -13,7 +17,7 @@ defmodule FamilyFeud.GameChannel do
 
   intercept ["new_msg"]
   def handle_out("new_msg", payload, socket) do
-    if socket.assigns[:user] == "public" do
+    if socket.assigns[:user] == "admin" do
       push socket, "new_msg", payload
     end
     {:noreply, socket}

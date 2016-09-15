@@ -18,6 +18,7 @@ defmodule FamilyFeud.Web do
 
   def model do
     quote do
+      import IEx
       use Ecto.Schema
 
       alias FamilyFeud.Repo
@@ -30,6 +31,7 @@ defmodule FamilyFeud.Web do
 
   def controller do
     quote do
+      import IEx
       use Phoenix.Controller
 
       alias FamilyFeud.Repo
@@ -45,6 +47,7 @@ defmodule FamilyFeud.Web do
 
   def view do
     quote do
+      import IEx
       use Phoenix.View, root: "web/templates"
 
       # Import convenience functions from controllers
@@ -63,12 +66,14 @@ defmodule FamilyFeud.Web do
 
   def router do
     quote do
+      import IEx
       use Phoenix.Router
     end
   end
 
   def channel do
     quote do
+      import IEx
       use Phoenix.Channel
 
       alias FamilyFeud.Repo

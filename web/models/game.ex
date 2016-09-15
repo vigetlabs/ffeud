@@ -5,6 +5,7 @@ defmodule FamilyFeud.Game do
 
   schema "games" do
     field :name, :string
+    field :public_code, :string
     belongs_to :user, FamilyFeud.User
     has_many :rounds, FamilyFeud.Round
 
@@ -13,12 +14,13 @@ defmodule FamilyFeud.Game do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :user_id])
-    |> validate_required([:name, :user_id])
+    |> cast(params, [:name, :user_id, :public_code])
+    |> validate_required([:name, :user_id, :public_code])
   end
 
   def create(params, user) do
     params    = Map.put(params, "user_id", user.id)
+    params    = Map.put(params, "public_code", random_code)
     changeset = Game.changeset(%Game{}, params)
 
     Repo.insert(changeset)
@@ -30,5 +32,18 @@ defmodule FamilyFeud.Game do
       order_by: r.position
 
     Repo.all query
+  end
+
+  def random_code do
+    Enum.map(1..4, fn(_x) -> random_letter end) |> Enum.join
+  end
+
+  def random_letter do
+    :random.seed(:os.timestamp)
+    Enum.shuffle(alphabet) |> List.first
+  end
+
+  def alphabet do
+    ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
   end
 end
