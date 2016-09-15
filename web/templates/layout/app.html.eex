@@ -12,7 +12,10 @@
   </head>
 
   <body>
-    <%= render "header.html", conn: @conn %>
+    <%= if !@conn.assigns[:no_header] do %>
+      <%= render "header.html", conn: @conn %>
+    <% end %>
+
     <div class="container">
       <main role="main">
         <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

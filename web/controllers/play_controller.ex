@@ -14,7 +14,7 @@ defmodule FamilyFeud.PlayController do
   end
 
   def public(conn, _params) do
-    render conn, :public
+    render conn, :public, no_header: true
   end
 
   def load_game(conn, _) do
