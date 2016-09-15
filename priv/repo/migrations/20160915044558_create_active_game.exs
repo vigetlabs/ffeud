@@ -3,7 +3,7 @@ defmodule FamilyFeud.Repo.Migrations.CreateActiveGame do
 
   def change do
     create table(:active_games) do
-      add :active, :boolean, default: false, null: false
+      add :active, :boolean, default: true, null: false
       add :pot, :integer
       add :team_1_score, :integer
       add :team_2_score, :integer

@@ -19,6 +19,7 @@ defmodule FamilyFeud.GameState do
       round_info:   %{
         question: round.question,
         x_count:  active_round.x_count,
+        rebuttal: active_round.rebuttal,
         answers:  get_answers(round, active_round, access)
       }
     }

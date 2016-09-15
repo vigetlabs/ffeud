@@ -2,6 +2,7 @@ import React   from "react"
 import Header  from "./admin/header.js"
 import Answers from "./admin/answers.js"
 import Strikes from "./admin/strikes.js"
+import Actions from "./admin/actions.js"
 
 let AdminApp = React.createClass({
   getInitialState() {
@@ -12,7 +13,8 @@ let AdminApp = React.createClass({
       round_info: {
         question: "",
         x_count:  0,
-        answers:  []
+        answers:  [],
+        rebuttal: false
       }
     }
   },
@@ -37,6 +39,7 @@ let AdminApp = React.createClass({
         <Header  { ...this.state } />
         <Answers channel={ this.props.channel} { ...this.state } />
         <Strikes channel={ this.props.channel} { ...this.state } />
+        <Actions channel={ this.props.channel} { ...this.state } />
       </div>
     )
   }

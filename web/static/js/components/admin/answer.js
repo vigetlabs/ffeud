@@ -1,4 +1,4 @@
-import React  from "react"
+import React from "react"
 
 let Answer = React.createClass({
   render() {
