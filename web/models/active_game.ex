@@ -22,12 +22,17 @@ defmodule FamilyFeud.ActiveGame do
 
   def get_active_round(active_game, round \\ nil) do
     game         = Repo.get(Game, active_game.game_id)
+    round        = round || Game.first_round(game)
     active_round = Repo.get_by(ActiveRound, active_game_id: active_game.id, active: true)
 
     if !active_round do
-      ActiveRound.create(active_game, round || Game.first_round(game))
+      {:ok, active_round} = ActiveRound.create(active_game, round)
+
+      if round == Game.ordered_rounds(game) |> List.last do
+        ActiveRound.update(active_round, %{last_round: true})
+      end
     end
 
-    Repo.get_by(ActiveRound, active_game_id: active_game.id, active: true)
+    active_round
   end
 end
