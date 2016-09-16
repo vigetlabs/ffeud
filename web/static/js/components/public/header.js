@@ -14,10 +14,10 @@ let Header = React.createClass({
           Team 2: { team_2_score }
         </div>
         <div>
-          Pot: { pot }
+          Multiplier: { multiplier }
         </div>
         <div>
-          Multiplier: { multiplier }
+          Pot: { pot }
         </div>
         <div>
           Question: { round_info.question }

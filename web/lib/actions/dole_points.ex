@@ -12,10 +12,8 @@ defmodule FamilyFeud.Actions.DolePoints do
     earned_points = active_round.pot * round.multiplier
 
     params = case team do
-    1 ->
-      %{team_1_score: active_game.team_1_score + earned_points}
-    2 ->
-      %{team_2_score: active_game.team_2_score + earned_points}
+      1 -> %{team_1_score: active_game.team_1_score + earned_points}
+      2 -> %{team_2_score: active_game.team_2_score + earned_points}
     end
 
     ActiveGame.update(active_game, params)

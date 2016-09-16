@@ -38,10 +38,10 @@ let AdminApp = React.createClass({
   render() {
     return (
       <div>
-        <Header  { ...this.state } />
-        <Answers channel={ this.props.channel} { ...this.state } />
-        <Strikes channel={ this.props.channel} { ...this.state } />
-        <Actions channel={ this.props.channel} { ...this.state } />
+        <Header  channel={ this.props.channel } { ...this.state } />
+        <Answers channel={ this.props.channel } { ...this.state } />
+        <Strikes channel={ this.props.channel } { ...this.state } />
+        <Actions channel={ this.props.channel } { ...this.state } />
       </div>
     )
   }

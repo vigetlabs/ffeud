@@ -18,4 +18,8 @@ defmodule FamilyFeud.ActionHandler do
   def handle("reset_game", game, _params) do
     FamilyFeud.Actions.ResetGame.act(game)
   end
+
+  def handle("edit_data", game, %{"field" => field, "value" => value}) do
+    FamilyFeud.Actions.EditData.act(game, field, value)
+  end
 end
