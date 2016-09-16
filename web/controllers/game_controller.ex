@@ -24,10 +24,10 @@ defmodule FamilyFeud.GameController do
 
   def create(conn, %{"game" => game_params}) do
     case Game.create(game_params, current_user(conn)) do
-      {:ok, _game} ->
+      {:ok, game} ->
         conn
         |> put_flash(:info, "Game created")
-        |> redirect(to: game_path(conn, :index))
+        |> redirect(to: game_path(conn, :show, game))
       {:error, _changeset} ->
         conn
         |> put_flash(:info, "Something went wrong with that.")
