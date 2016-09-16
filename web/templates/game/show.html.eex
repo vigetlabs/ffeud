@@ -39,7 +39,7 @@
     <%= link "Play!", to: game_play_path(@conn, :admin, @game), class: "btn btn-success" %>
   <% end %>
 </div>
-
+<hr>
 <div>
   <%= link "Back", to: game_path(@conn, :index), class: "btn btn-default" %>
   <%= link "Delete", to: game_path(@conn, :delete, @game), method: :delete, data: [confirm: "Are you sure you want to delete this Game?"], class: "btn btn-danger" %>
