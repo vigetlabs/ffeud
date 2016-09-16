@@ -2,6 +2,7 @@ defmodule FamilyFeud.PlayController do
   use FamilyFeud.Web, :controller
   alias FamilyFeud.Game
   alias FamilyFeud.ActiveGame
+  alias FamilyFeud.LayoutView
 
   plug :load_game
   plug :require_game
@@ -15,7 +16,7 @@ defmodule FamilyFeud.PlayController do
   end
 
   def public(conn, _params) do
-    render conn, :public, no_header: true
+    render conn, :public, layout: {LayoutView, :public}
   end
 
   def load_game(conn, _) do
