@@ -12,6 +12,11 @@
   </div>
 
   <div class="form-group">
+    <label for="multiplier">Multiplier</label>
+    <%= number_input f, :multiplier, value: 1, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Create", class: "btn btn-primary" %>
     <%= link "Cancel", to: game_path(@conn, :show, @game), class: "btn btn-default" %>
   </div>

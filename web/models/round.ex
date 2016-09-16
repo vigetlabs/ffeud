@@ -4,6 +4,7 @@ defmodule FamilyFeud.Round do
   schema "rounds" do
     field :question, :string
     field :position, :integer
+    field :multiplier, :integer, default: 1
     belongs_to :game, Game
     has_many :answers, Answer
 
@@ -12,8 +13,8 @@ defmodule FamilyFeud.Round do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:question, :position, :game_id])
-    |> validate_required([:question, :position, :game_id])
+    |> cast(params, [:question, :position, :multiplier, :game_id])
+    |> validate_required([:question, :position, :multiplier, :game_id])
   end
 
   def create(params, game) do

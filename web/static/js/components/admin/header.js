@@ -3,7 +3,7 @@ import React from "react"
 let Header = React.createClass({
   render() {
     let { team_1_score, team_2_score, round_info } = this.props
-    let { pot } = round_info
+    let { pot, multiplier } = round_info
 
     return (
       <div className="well">
@@ -15,6 +15,9 @@ let Header = React.createClass({
         </div>
         <div>
           Pot: { pot }
+        </div>
+        <div>
+          Multiplier: { multiplier }
         </div>
         <div>
           Question: { round_info.question }

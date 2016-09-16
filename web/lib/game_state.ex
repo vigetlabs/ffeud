@@ -17,6 +17,7 @@ defmodule FamilyFeud.GameState do
       team_2_score: active_game.team_2_score,
       round_info:   %{
         pot:        active_round.pot,
+        multiplier: round.multiplier,
         question:   round.question,
         answers:    get_answers(round, active_round, access),
         x_count:    active_round.x_count,
