@@ -4,6 +4,7 @@ defmodule FamilyFeud.PlayController do
   alias FamilyFeud.ActiveGame
 
   plug :load_game
+  plug :require_game
   plug :authorize_access, "before admin" when action in [:admin]
 
   def admin(conn, _params) do
@@ -26,6 +27,17 @@ defmodule FamilyFeud.PlayController do
     end
 
     assign(conn, :game, game)
+  end
+
+  def require_game(conn, _) do
+    game = conn.assigns[:game]
+    if game do
+      conn
+    else
+      conn
+      |> put_flash(:info, "Page not found")
+      |> redirect(to: "/")
+    end
   end
 
   def authorize_access(conn, _) do

@@ -21,7 +21,6 @@ defmodule FamilyFeud.Router do
         end
       end
     end
-    get "/:public_code", PlayController, :public
 
     resources "/registrations", RegistrationController,
       only: [:new, :create]
@@ -29,5 +28,7 @@ defmodule FamilyFeud.Router do
     get  "/login",  SessionController, :new
     post "/login",  SessionController, :create
     get  "/logout", SessionController, :delete
+
+    get "/:public_code", PlayController, :public
   end
 end
