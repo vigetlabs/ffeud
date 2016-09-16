@@ -10,7 +10,6 @@ defmodule FamilyFeud.Actions.ResetGame do
     active_round = active_round_for(active_game)
 
     ActiveGame.update(active_game, %{
-      pot: 0,
       team_1_score: 0,
       team_2_score: 0
     })

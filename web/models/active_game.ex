@@ -3,7 +3,6 @@ defmodule FamilyFeud.ActiveGame do
 
   schema "active_games" do
     field :active, :boolean, default: true
-    field :pot, :integer, default: 0
     field :team_1_score, :integer, default: 0
     field :team_2_score, :integer, default: 0
     belongs_to :game, Game
@@ -13,8 +12,8 @@ defmodule FamilyFeud.ActiveGame do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:active, :pot, :team_1_score, :team_2_score, :game_id])
-    |> validate_required([:active, :pot, :team_1_score, :team_2_score, :game_id])
+    |> cast(params, [:active, :team_1_score, :team_2_score, :game_id])
+    |> validate_required([:active, :team_1_score, :team_2_score, :game_id])
   end
 
   def create(game) do

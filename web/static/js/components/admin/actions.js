@@ -14,7 +14,7 @@ let Actions = React.createClass({
   },
 
   done() {
-    let { pot } = this.props
+    let { pot } = this.props.round_info
 
     return (
       <div className="well">

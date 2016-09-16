@@ -2,7 +2,8 @@ import React from "react"
 
 let Header = React.createClass({
   render() {
-    let { team_1_score, team_2_score, pot, round_info } = this.props
+    let { team_1_score, team_2_score, round_info } = this.props
+    let { pot } = round_info
 
     return (
       <div className="well">

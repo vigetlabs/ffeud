@@ -9,8 +9,8 @@ let AdminApp = React.createClass({
     return {
       team_1_score: 0,
       team_2_score: 0,
-      pot: 0,
       round_info: {
+        pot:        0,
         question:   "",
         x_count:    0,
         answers:    [],

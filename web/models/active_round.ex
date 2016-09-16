@@ -3,6 +3,7 @@ defmodule FamilyFeud.ActiveRound do
 
   schema "active_rounds" do
     field :active,       :boolean, default: true
+    field :pot,          :integer, default: 0
     field :answer_state, {:array, :boolean}, default: []
     field :x_count,      :integer, default: 0
     field :rebuttal,     :boolean, default: false
@@ -15,8 +16,8 @@ defmodule FamilyFeud.ActiveRound do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:active, :answer_state, :x_count, :rebuttal, :last_round, :active_game_id, :round_id])
-    |> validate_required([:active, :answer_state, :x_count, :rebuttal, :last_round, :active_game_id, :round_id])
+    |> cast(params, [:active, :pot, :answer_state, :x_count, :rebuttal, :last_round, :active_game_id, :round_id])
+    |> validate_required([:active, :pot, :answer_state, :x_count, :rebuttal, :last_round, :active_game_id, :round_id])
   end
 
   def create(active_game, round) do

@@ -13,14 +13,14 @@ defmodule FamilyFeud.GameState do
 
     %{
       access:       access,
-      pot:          active_game.pot,
       team_1_score: active_game.team_1_score,
       team_2_score: active_game.team_2_score,
       round_info:   %{
+        pot:        active_round.pot,
         question:   round.question,
+        answers:    get_answers(round, active_round, access),
         x_count:    active_round.x_count,
         rebuttal:   active_round.rebuttal,
-        answers:    get_answers(round, active_round, access),
         done:       round_done?(active_round),
         last_round: active_round.last_round
       }

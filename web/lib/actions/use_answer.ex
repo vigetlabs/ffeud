@@ -6,27 +6,22 @@ defmodule FamilyFeud.Actions.UseAnswer do
   alias FamilyFeud.ActiveRound
 
   def act(game, index) do
-    active_game  = active_game_for(game)
-    active_round = active_round_for(active_game)
+    active_round = active_round_for(game)
     round        = round_for(active_round)
     answer       = Round.ordered_answers(round) |> Enum.at(index)
 
-    new_pot_value = active_game.pot + answer.points
-    ActiveGame.update(active_game, %{pot: new_pot_value})
-
+    new_pot_value    = active_round.pot + answer.points
     new_answer_state = active_round.answer_state |> List.replace_at(index, true)
-    params           = %{answer_state: new_answer_state}
+    params           = %{pot: new_pot_value, answer_state: new_answer_state}
     if active_round.rebuttal, do: params = Map.put(params, :rebuttal, false)
 
     ActiveRound.update(active_round, params)
   end
 
-  def active_game_for(game) do
-    Game.get_active_game(game)
-  end
-
-  def active_round_for(active_game) do
-    ActiveGame.get_active_round(active_game)
+  def active_round_for(game) do
+    game
+    |> Game.get_active_game
+    |> ActiveGame.get_active_round
   end
 
   def round_for(active_round) do
