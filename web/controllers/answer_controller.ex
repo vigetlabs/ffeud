@@ -21,9 +21,9 @@ defmodule FamilyFeud.AnswerController do
         conn
         |> put_flash(:info, "Answer created")
         |> redirect(to: game_path(conn, :show, params["game_id"]))
-      {:error, _changeset} ->
+      {:error, changeset} ->
         conn
-        |> put_flash(:info, "Something went wrong with that")
+        |> put_flash(:error, error_for(changeset))
         |> render(:new)
     end
   end
@@ -40,9 +40,9 @@ defmodule FamilyFeud.AnswerController do
         conn
         |> put_flash(:info, "Answer updated")
         |> redirect(to: game_path(conn, :show, params["game_id"]))
-      {:error, _changeset} ->
+      {:error, changeset} ->
         conn
-        |> put_flash(:info, "Something went wrong with that")
+        |> put_flash(:error, error_for(changeset))
         |> render(:edit, answer: answer)
     end
   end

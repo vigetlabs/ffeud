@@ -18,9 +18,9 @@ defmodule FamilyFeud.RoundController do
         conn
         |> put_flash(:info, "Round created")
         |> redirect(to: game_path(conn, :show, params["game_id"]))
-      {:error, _changeset} ->
+      {:error, changeset} ->
         conn
-        |> put_flash(:info, "Something went wrong with that")
+        |> put_flash(:error, error_for(changeset))
         |> render(:new)
     end
   end
@@ -37,9 +37,9 @@ defmodule FamilyFeud.RoundController do
         conn
         |> put_flash(:info, "Round updated")
         |> redirect(to: game_path(conn, :show, params["game_id"]))
-      {:error, _changeset} ->
+      {:error, changeset} ->
         conn
-        |> put_flash(:info, "Something went wrong with that")
+        |> put_flash(:error, error_for(changeset))
         |> render(:edit, round: round)
     end
   end

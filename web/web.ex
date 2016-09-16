@@ -51,6 +51,17 @@ defmodule FamilyFeud.Web do
       import FamilyFeud.Gettext
 
       import FamilyFeud.ApplicationHelper
+
+      def error_for(changeset) do
+        {key, {value, _}} = changeset.errors |> List.first
+
+        if key == :base do
+          value
+        else
+          key = key |> Atom.to_string |> String.capitalize
+          key <> " " <> value
+        end
+      end
     end
   end
 

@@ -28,9 +28,9 @@ defmodule FamilyFeud.GameController do
         conn
         |> put_flash(:info, "Game created")
         |> redirect(to: game_path(conn, :show, game))
-      {:error, _changeset} ->
+      {:error, changeset} ->
         conn
-        |> put_flash(:info, "Something went wrong with that.")
+        |> put_flash(:error, error_for(changeset))
         |> render(:new)
     end
   end
