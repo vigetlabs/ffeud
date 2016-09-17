@@ -17,7 +17,7 @@ let Header = React.createClass({
       <div className="well">
         <div>
           Team 1: { team_1_score }
-          <span className="btn-spacious">
+          <span className="left-padded">
             <a id="team_1_edit_link" href="#" onClick={ (e) => this.toggle_edit_field(e, "team_1") }>
               Edit
             </a>
@@ -30,7 +30,7 @@ let Header = React.createClass({
         </div>
         <div>
           Team 2: { team_2_score }
-          <span className="btn-spacious">
+          <span className="left-padded">
             <a id="team_2_edit_link" href="#" onClick={ (e) => this.toggle_edit_field(e, "team_2") }>
               Edit
             </a>
@@ -43,7 +43,7 @@ let Header = React.createClass({
         </div>
         <div>
           Multiplier: { multiplier }
-          <span className="btn-spacious">
+          <span className="left-padded">
             <a id="multiplier_edit_link" href="#" onClick={ (e) => this.toggle_edit_field(e, "multiplier") }>
               Edit
             </a>

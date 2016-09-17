@@ -1,0 +1,53 @@
+.answer {
+  &.admin {
+    &.used {
+      color: grey;
+    }
+  }
+}
+
+.answers {
+  &.public {
+    background: $white;
+    text-align: center;
+    padding: 5px 10%;
+
+    .answer-column {
+      width: calc(40% - 5px);
+      display: inline-block;
+
+      &.column-wide {
+        width: 80%;
+      }
+    }
+
+    .answer {
+      display: flex;
+      border: 1px solid black;
+      font-size: 20px;
+      line-height: 50px;
+      min-height: 50px;
+      background: $pale-blue;
+      margin: 10px 10px;
+      color: $white;
+
+      .answer-empty {
+        color: black;
+        background: $grey;
+        width: 100%;
+      }
+
+      .answer-body {
+        width: calc(100% - 50px);
+        background: $blue;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .answer-points {
+        width: 50px;
+        font-weight: bold;
+      }
+    }
+  }
+}

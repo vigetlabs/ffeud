@@ -1,0 +1,22 @@
+.strike {
+  border: 1px solid black;
+  width: 25px;
+  display: inline;
+  padding: 10px;
+  border-radius: 4px;
+  margin-right: 5px;
+
+  &.strike-on {
+    background: red;
+  }
+
+  &.strike-off {
+    background: lightgrey;
+  }
+
+  &.strike-link {
+    &:hover {
+      background: lightcoral;
+    }
+  }
+}

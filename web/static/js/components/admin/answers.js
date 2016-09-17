@@ -27,7 +27,7 @@ let Answers = React.createClass({
   },
 
   class_name(answer) {
-    return "answer answer-" + (answer.used ? "used" : "unused")
+    return "answer admin " + (answer.used ? "used" : "unused")
   },
 })
 

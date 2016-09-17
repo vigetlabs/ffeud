@@ -1,0 +1,68 @@
+.points-and-pot {
+  display: flex;
+  justify-content: space-between;
+}
+
+.team-left {
+  text-align: center;
+  border: 1px solid black;
+  width: 25%;
+  height: 125px;
+  background: $red;
+  border-bottom-right-radius: 20px;
+}
+
+.team-right {
+  text-align: center;
+  border: 1px solid black;
+  width: 25%;
+  height: 125px;
+  background: $light-blue;
+  border-bottom-left-radius: 20px;
+}
+
+.team-name {
+  color: $white;
+  font-size: 25px;
+}
+
+.team-score {
+  color: $white;
+  font-size: 60px;
+  position: relative;
+  top: -5px;
+}
+
+.weed {
+  text-align: center;
+  border: 1px solid black;
+  width: 25%;
+  height: 125px;
+  background: $blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.pot {
+  font-size: 90px;
+}
+
+.multiplier {
+  position: relative;
+  top: -30px;
+  font-size: 20px;
+  border: 2px solid $white;
+  border-radius: 20px;
+  min-width: 40px;
+  padding: 5px;
+}
+
+.question {
+  margin: 20px;
+  text-align: center;
+  font-size: 30px;
+}

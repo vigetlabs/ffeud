@@ -29,10 +29,10 @@ let Actions = React.createClass({
     return (
       <div>
         Give points to:
-        <a href="#" className="btn btn-sm btn-default btn-spacious" onClick={ (e) => this.dole_points(e, 1) }>
+        <a href="#" className="btn btn-sm btn-default left-padded" onClick={ (e) => this.dole_points(e, 1) }>
           Team 1
         </a>
-        <a href="#" className="btn btn-sm btn-default btn-spacious" onClick={ (e) => this.dole_points(e, 2) }>
+        <a href="#" className="btn btn-sm btn-default left-padded" onClick={ (e) => this.dole_points(e, 2) }>
           Team 2
         </a>
       </div>
@@ -44,7 +44,7 @@ let Actions = React.createClass({
       return (
         <div>
           That's all Folks!
-          <a href="#" className="btn btn-sm btn-success btn-spacious" onClick={ this.reset_game }>
+          <a href="#" className="btn btn-sm btn-success left-padded" onClick={ this.reset_game }>
             Reset
           </a>
         </div>
@@ -53,7 +53,7 @@ let Actions = React.createClass({
       return (
         <div>
           Ready for the next round?
-          <a href="#" className="btn btn-sm btn-success btn-spacious" onClick={ this.next_round }>
+          <a href="#" className="btn btn-sm btn-success left-padded" onClick={ this.next_round }>
             Next Round
           </a>
         </div>

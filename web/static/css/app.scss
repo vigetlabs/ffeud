@@ -1,38 +1,22 @@
 /* This file is for your main application css. */
 
+@import 'colors';
+
+@import 'header';
+@import 'strikes';
+@import 'answers';
+
 .no-margin {
   margin: 0;
 }
 
-.strike {
-  border: 1px solid black;
-  width: 25px;
-  display: inline;
-  padding: 10px;
-  border-radius: 4px;
-  margin-right: 5px;
-
-  &.strike-on {
-    background: red;
-  }
-
-  &.strike-off {
-    background: lightgrey;
-  }
-
-  &.strike-link {
-    &:hover {
-      background: lightcoral;
-    }
-  }
-}
-
-.answer {
-  &.answer-used {
-    color: grey;
-  }
-}
-
-.btn-spacious {
+.left-padded {
   margin-left: 5px;
+}
+
+.public-page {
+  background: $grey;
+  min-width: 800px;
+  max-width: 1200px;
+  margin: 0 auto;
 }

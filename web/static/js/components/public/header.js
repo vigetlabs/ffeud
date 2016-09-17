@@ -3,27 +3,58 @@ import React from "react"
 let Header = React.createClass({
   render() {
     let { team_1_score, team_2_score, round_info } = this.props
-    let { pot, multiplier } = round_info
 
     return (
-      <div className="well">
-        <div>
-          Team 1: { team_1_score }
+      <div>
+        <div className="points-and-pot">
+          <div className="team-left">
+            <div className="team-name">
+              Team 1:
+            </div>
+            <div className="team-score">
+              { team_1_score }
+            </div>
+          </div>
+          <div className="weed">
+            { this.render_pot() }
+            { this.render_multiplier() }
+          </div>
+          <div className="team-right">
+            <div className="team-name">
+              Team 2:
+            </div>
+            <div className="team-score">
+              { team_2_score }
+            </div>
+          </div>
         </div>
-        <div>
-          Team 2: { team_2_score }
-        </div>
-        <div>
-          Multiplier: { multiplier }
-        </div>
-        <div>
-          Pot: { pot }
-        </div>
-        <div>
-          Question: { round_info.question }
+        <div className="question">
+          { round_info.question }
         </div>
       </div>
     )
+  },
+
+  render_pot() {
+    let { pot } = this.props.round_info
+    return (
+      <div className="pot">
+        { pot }
+      </div>
+    )
+  },
+
+  render_multiplier() {
+    let { multiplier } = this.props.round_info
+    if (multiplier > 1) {
+      return (
+        <div className="multiplier">
+          x{ multiplier }
+        </div>
+      )
+    } else {
+      return null
+    }
   }
 })
 
