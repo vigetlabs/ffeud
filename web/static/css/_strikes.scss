@@ -1,22 +1,60 @@
-.strike {
-  border: 1px solid black;
-  width: 25px;
-  display: inline;
-  padding: 10px;
-  border-radius: 4px;
-  margin-right: 5px;
+.strikes {
+  &.admin {
+    padding-top: 30px;
+    padding-bottom: 30px;
 
-  &.strike-on {
-    background: red;
+    .strike {
+      border: 1px solid black;
+      display: inline;
+      padding: 15px;
+      font-size: 15px;
+      border-radius: 4px;
+      margin-right: 5px;
+
+      &.strike-on {
+        background: red;
+      }
+
+      &.strike-off {
+        background: lightgrey;
+      }
+
+      &.strike-link {
+        &:hover {
+          background: lightcoral;
+         }
+       }
+     }
   }
 
-  &.strike-off {
-    background: lightgrey;
-  }
+  &.public {
+    width: 250px;
+    padding-top: 40px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
 
-  &.strike-link {
-    &:hover {
-      background: lightcoral;
+    .strike {
+      width: 70px;
+      height: 80px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      border: 1px solid grey;
+
+      .strike-x {
+        color: white;
+      }
+
+      &.strike-on {
+        background: red;
+      }
+
+      &.strike-off {
+        background: lightgrey;
+      }
     }
   }
 }

@@ -5,7 +5,7 @@ let Strikes = React.createClass({
     let { rebuttal } = this.props.round_info
 
     return (
-      <div className="well">
+      <div className="well strikes admin">
         { this.strike_for(1) }
         { this.strike_for(2) }
         { this.strike_for(3) }

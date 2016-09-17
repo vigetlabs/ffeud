@@ -6,6 +6,10 @@
 @import 'strikes';
 @import 'answers';
 
+.grey-body {
+  background: $grey;
+}
+
 .no-margin {
   margin: 0;
 }

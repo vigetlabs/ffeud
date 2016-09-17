@@ -3,15 +3,15 @@ import React from "react"
 let Strikes = React.createClass({
   render() {
     return (
-      <div className="well">
+      <div className="strikes public">
         <div className={ this.class_for(1) }>
-          X
+          <div className="strike-x">X</div>
         </div>
         <div className={ this.class_for(2) }>
-          X
+          <div className="strike-x">X</div>
         </div>
         <div className={ this.class_for(3) }>
-          X
+          <div className="strike-x">X</div>
         </div>
       </div>
     )
