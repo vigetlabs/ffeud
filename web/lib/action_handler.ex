@@ -3,6 +3,10 @@ defmodule FamilyFeud.ActionHandler do
     FamilyFeud.Actions.UseAnswer.act(game, index)
   end
 
+  def handle("reveal_answer", game, %{"index" => index}) do
+    FamilyFeud.Actions.RevealAnswer.act(game, index)
+  end
+
   def handle("add_strike", game, _params) do
     FamilyFeud.Actions.AddStrike.act(game)
   end
