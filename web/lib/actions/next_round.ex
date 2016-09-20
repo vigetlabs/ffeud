@@ -21,6 +21,7 @@ defmodule FamilyFeud.Actions.NextRound do
     next_round  = ordered_rounds |> Enum.at(round_index + 1)
 
     deactivate_round(active_round)
+    ActiveGame.update(active_game, %{team_1_score: 0, team_2_score: 0})
     ActiveGame.get_active_round(active_game, next_round)
   end
 
