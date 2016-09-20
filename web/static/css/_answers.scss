@@ -15,10 +15,7 @@
     .answer-column {
       width: calc(40% - 5px);
       display: inline-block;
-
-      &.column-wide {
-        width: 80%;
-      }
+      width: 80%;
     }
 
     .answer {

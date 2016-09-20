@@ -1,3 +1,5 @@
+// TODO: Add team strikes
+
 import React from "react"
 
 let Header = React.createClass({
@@ -24,6 +26,30 @@ let Header = React.createClass({
             </div>
           </div>
         </div>
+        <div className="team-strikes">
+          <div className="left-strikes">
+            <div className={ this.strike_class_for(1, 1) }>
+              <div className="strike-x">X</div>
+            </div>
+            <div className={ this.strike_class_for(2, 1) }>
+              <div className="strike-x">X</div>
+            </div>
+            <div className={ this.strike_class_for(3, 1) }>
+              <div className="strike-x">X</div>
+            </div>
+          </div>
+          <div className="right-strikes">
+            <div className={ this.strike_class_for(1, 2) }>
+              <div className="strike-x">X</div>
+            </div>
+            <div className={ this.strike_class_for(2, 2) }>
+              <div className="strike-x">X</div>
+            </div>
+            <div className={ this.strike_class_for(3, 2) }>
+              <div className="strike-x">X</div>
+            </div>
+          </div>
+        </div>
         <div className="question">
           { round_info.question }
         </div>
@@ -31,26 +57,11 @@ let Header = React.createClass({
     )
   },
 
-  render_pot() {
-    let { pot } = this.props.round_info
-    return (
-      <div className="pot">
-        { pot }
-      </div>
-    )
-  },
+  strike_class_for(i, team) {
+    let count = team == 1 ? this.props.round_info.team_1_x_count : this.props.round_info.team_2_x_count
+    let on_off = i <= count ? "on" : "off"
 
-  render_multiplier() {
-    let { multiplier } = this.props.round_info
-    if (multiplier > 1) {
-      return (
-        <div className="multiplier">
-          x{ multiplier }
-        </div>
-      )
-    } else {
-      return null
-    }
+    return "strike strike-" + on_off
   }
 })
 

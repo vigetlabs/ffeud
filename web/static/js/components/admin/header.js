@@ -83,9 +83,6 @@ let Header = React.createClass({
           </span>
         </div>
         <div>
-          Pot: { pot }
-        </div>
-        <div>
           Question: { round_info.question }
         </div>
       </div>

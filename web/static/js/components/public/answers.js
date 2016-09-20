@@ -6,37 +6,11 @@ let Answers = React.createClass({
 
     return (
       <div className="answers public">
-        { this.render_left_column() }
-        { answers.length > 4 ? this.render_right_column() : null }
+        <div className="answer-column">
+          { [0,1,2,3,4].map(this.render_answer) }
+        </div>
       </div>
     )
-  },
-
-  render_left_column() {
-    let answers    = this.props.round_info.answers
-    let class_name = "answer-column column-" + (answers.length > 4 ? "normal" : "wide")
-
-    return (
-      <div className={ class_name }>
-        { this.render_left_answers() }
-      </div>
-    )
-  },
-
-  render_right_column() {
-    return (
-      <div className="answer-column">
-        { this.render_right_answers() }
-      </div>
-    )
-  },
-
-  render_left_answers() {
-    return [0,1,2,3].map(this.render_answer)
-  },
-
-  render_right_answers() {
-    return [4,5,6,7].map(this.render_answer)
   },
 
   render_answer(index) {

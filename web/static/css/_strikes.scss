@@ -22,38 +22,7 @@
       &.strike-link {
         &:hover {
           background: lightcoral;
-         }
-       }
-     }
-  }
-
-  &.public {
-    width: 250px;
-    padding-top: 40px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-
-    .strike {
-      width: 70px;
-      height: 80px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      border: 1px solid grey;
-
-      .strike-x {
-        color: white;
-      }
-
-      &.strike-on {
-        background: red;
-      }
-
-      &.strike-off {
-        background: lightgrey;
+        }
       }
     }
   }

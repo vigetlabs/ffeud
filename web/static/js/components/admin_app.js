@@ -14,7 +14,6 @@ let AdminApp = React.createClass({
       team_1_score: 0,
       team_2_score: 0,
       round_info: {
-        pot:            0,
         multiplier:     1,
         question:       "",
         team_1_x_count: 0,
