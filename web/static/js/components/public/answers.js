@@ -32,15 +32,11 @@ let Answers = React.createClass({
   },
 
   render_left_answers() {
-    return [0,1,2,3].map(function(index) {
-      return this.render_answer(index)
-    }.bind(this))
+    return [0,1,2,3].map(this.render_answer)
   },
 
   render_right_answers() {
-    return [4,5,6,7].map(function(index) {
-      return this.render_answer(index)
-    }.bind(this))
+    return [4,5,6,7].map(this.render_answer)
   },
 
   render_answer(index) {

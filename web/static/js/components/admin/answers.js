@@ -14,21 +14,25 @@ let Answers = React.createClass({
   },
 
   render_answers() {
-    let { round_info, channel } = this.props
+    let { round_info } = this.props
     let answers = round_info.answers
 
-    return answers.map(function(answer, index) {
-      return (
-        <li className={ this.class_name(answer) } key={ index }>
-          <Answer channel={ channel } answer={ answer } index={ index } done={ round_info.done } />
-        </li>
-      )
-    }.bind(this))
+    return answers.map(this.render_answer)
   },
 
   class_name(answer) {
     return "answer admin " + (answer.used ? "used" : "unused")
   },
+
+  render_answer(answer, index) {
+    let { round_info, channel } = this.props
+
+    return (
+      <li className={ this.class_name(answer) } key={ index }>
+        <Answer channel={ channel } answer={ answer } index={ index } done={ round_info.done } />
+      </li>
+    )
+  }
 })
 
 export default Answers

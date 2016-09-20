@@ -61,7 +61,6 @@ let Actions = React.createClass({
     }
   },
 
-
   rebuttal() {
     return (
       <div className="well">
