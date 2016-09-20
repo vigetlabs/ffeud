@@ -15,10 +15,6 @@ let Header = React.createClass({
               { team_1_score }
             </div>
           </div>
-          <div className="weed">
-            { this.render_pot() }
-            { this.render_multiplier() }
-          </div>
           <div className="team-right">
             <div className="team-name">
               { team_2_name }

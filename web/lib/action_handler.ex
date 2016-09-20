@@ -1,6 +1,6 @@
 defmodule FamilyFeud.ActionHandler do
-  def handle("use_answer", game, %{"index" => index}) do
-    FamilyFeud.Actions.UseAnswer.act(game, index)
+  def handle("use_answer", game, %{"index" => index, "team" => team}) do
+    FamilyFeud.Actions.UseAnswer.act(game, index, team)
   end
 
   def handle("reveal_answer", game, %{"index" => index}) do

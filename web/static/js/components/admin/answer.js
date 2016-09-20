@@ -13,25 +13,23 @@ let Answer = React.createClass({
     } else if (done) {
       return (
         <div>
-          { answer.body } ({ answer.points }) <a href="#" onClick={ (e) => this.reveal_answer(e, index) }>Reveal</a>
+          { answer.body } ({ answer.points }) <button className="btn btn-sm" onClick={ () => this.reveal_answer(index) }>Reveal</button>
         </div>
       )
     } else {
       return (
         <div>
-          { answer.body } ({ answer.points }) <a href="#" onClick={ (e) => this.use_answer(e, index) }>Use</a>
+          { answer.body } ({ answer.points }) <button className="btn btn-sm" onClick={ () => this.use_answer(index, 1) }>Team 1</button> <button className="btn btn-sm" onClick={ () => this.use_answer(index, 2) }>Team 2</button>
         </div>
       )
     }
   },
 
-  use_answer(e, index) {
-    e.preventDefault()
-    this.props.channel.push("act", { action: "use_answer", index: index })
+  use_answer(index, team) {
+    this.props.channel.push("act", { action: "use_answer", index: index, team: team })
   },
 
-  reveal_answer(e, index) {
-    e.preventDefault()
+  reveal_answer(index) {
     this.props.channel.push("act", { action: "reveal_answer", index: index })
   }
 })
