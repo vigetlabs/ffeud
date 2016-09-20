@@ -32,14 +32,14 @@ defmodule FamilyFeud.GameState do
       team_1_score: active_game.team_1_score,
       team_2_score: active_game.team_2_score,
       round_info:   %{
-        pot:        active_round.pot,
-        multiplier: round.multiplier,
-        question:   round.question,
-        answers:    get_answers(round, active_round, access),
-        x_count:    active_round.x_count,
-        rebuttal:   active_round.rebuttal,
-        done:       round_done?(active_round),
-        last_round: active_round.last_round
+        pot:            active_round.pot,
+        multiplier:     round.multiplier,
+        question:       round.question,
+        answers:        get_answers(round, active_round, access),
+        team_1_x_count: active_round.team_1_x_count,
+        team_2_x_count: active_round.team_2_x_count,
+        done:           round_done?(active_round),
+        last_round:     active_round.last_round
       }
     }
   end
@@ -110,7 +110,7 @@ defmodule FamilyFeud.GameState do
 
   def round_done?(%ActiveRound{} = active_round) do
     all_answered = Enum.all?(active_round.answer_state)
-    struck_out   = (active_round.x_count >= 3 && !active_round.rebuttal)
+    struck_out   = (active_round.team_1_x_count >= 3 && active_round.team_2_x_count >= 3)
 
     all_answered || struck_out
   end

@@ -3,13 +3,13 @@ defmodule FamilyFeud.Actions.AddStrike do
   alias FamilyFeud.ActiveGame
   alias FamilyFeud.ActiveRound
 
-  def act(game) do
+  def act(game, team) do
     active_round = active_round_for(game)
 
-    new_x_count = active_round.x_count + 1
-    params      = %{x_count: new_x_count}
-    if new_x_count == 3,      do: params = Map.put(params, :rebuttal, true)
-    if active_round.rebuttal, do: params = Map.put(params, :rebuttal, false)
+    params = case team do
+      1 -> %{team_1_x_count: active_round.team_1_x_count + 1}
+      2 -> %{team_2_x_count: active_round.team_2_x_count + 1}
+    end
 
     ActiveRound.update(active_round, params)
   end

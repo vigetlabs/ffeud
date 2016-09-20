@@ -7,8 +7,8 @@ defmodule FamilyFeud.ActionHandler do
     FamilyFeud.Actions.RevealAnswer.act(game, index)
   end
 
-  def handle("add_strike", game, _params) do
-    FamilyFeud.Actions.AddStrike.act(game)
+  def handle("add_strike", game, %{"team" => team}) do
+    FamilyFeud.Actions.AddStrike.act(game, team)
   end
 
   def handle("dole_points", game, %{"team" => team}) do
