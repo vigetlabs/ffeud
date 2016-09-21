@@ -6,6 +6,7 @@ defmodule FamilyFeud.GameState do
   alias FamilyFeud.ActiveRound
 
   def get(game, access) do
+    game         = Repo.get(Game, game.id)
     active_game  = Game.get_active_game(game)
     active_round = ActiveGame.get_active_round(active_game)
     round        = Repo.get(Round, active_round.round_id)
@@ -13,6 +14,8 @@ defmodule FamilyFeud.GameState do
 
     %{
       access:       access,
+      team_1_name:  game.team_1_name,
+      team_2_name:  game.team_2_name,
       team_1_score: active_game.team_1_score,
       team_2_score: active_game.team_2_score,
       round_info:   %{

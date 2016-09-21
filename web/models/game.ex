@@ -4,6 +4,8 @@ defmodule FamilyFeud.Game do
   schema "games" do
     field :name, :string
     field :public_code, :string
+    field :team_1_name, :string
+    field :team_2_name, :string
     belongs_to :user, User
     has_many :rounds, Round
     has_many :active_games, ActiveGame
@@ -13,8 +15,8 @@ defmodule FamilyFeud.Game do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :user_id, :public_code])
-    |> validate_required([:name, :user_id, :public_code])
+    |> cast(params, [:name, :user_id, :public_code, :team_1_name, :team_2_name])
+    |> validate_required([:name, :user_id, :public_code, :team_1_name, :team_2_name])
   end
 
   def create(params, user) do

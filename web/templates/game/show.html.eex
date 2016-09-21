@@ -1,5 +1,9 @@
 <h1><%= @game.name %></h1>
 
+<div>
+  <b><%= @game.team_1_name %></b> vs <b><%= @game.team_2_name %></b>
+</div>
+
 <%= if Enum.empty? @rounds do %>
   <p>
     Looks like you haven't created any rounds yet.

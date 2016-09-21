@@ -7,7 +7,9 @@
 <% else %>
   <ul>
     <%= @games |> Enum.map fn game -> %>
-      <li><%= link game.name, to: game_path(@conn, :show, game.id) %></li>
+      <li>
+        <%= link game.name, to: game_path(@conn, :show, game.id) %>  (<%= link "Edit", to: game_path(@conn, :edit, game) %>)
+      </li>
     <% end %>
   </ul>
 <% end %>

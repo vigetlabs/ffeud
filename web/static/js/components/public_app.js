@@ -6,6 +6,8 @@ import Strikes from "./public/strikes.js"
 let PublicApp = React.createClass({
   getInitialState() {
     return {
+      team_1_name: "",
+      team_2_name: "",
       team_1_score: 0,
       team_2_score: 0,
       round_info: {

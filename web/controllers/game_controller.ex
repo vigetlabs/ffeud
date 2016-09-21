@@ -3,7 +3,7 @@ defmodule FamilyFeud.GameController do
   alias FamilyFeud.Game
 
   plug FamilyFeud.RequireLoggedIn
-  plug :authorize_access, "before show and delete" when action in [:show, :delete]
+  plug :authorize_access, "-" when action in [:show, :delete, :edit, :update]
 
   def index(conn, _params) do
     render conn, :index,
@@ -32,6 +32,25 @@ defmodule FamilyFeud.GameController do
         conn
         |> put_flash(:error, error_for(changeset))
         |> render(:new)
+    end
+  end
+
+  def edit(conn, %{"id" => id}) do
+    render conn, :edit, game: Repo.get(Game, id)
+  end
+
+  def update(conn, %{"id" => id, "game" => game_params} = params) do
+    game = Repo.get(Game, id)
+
+    case Game.update(game, game_params) do
+      {:ok, _game} ->
+        conn
+        |> put_flash(:info, "Game updated")
+        |> redirect(to: game_path(conn, :show, game))
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, error_for(changeset))
+        |> render(:edit, game: game)
     end
   end
 

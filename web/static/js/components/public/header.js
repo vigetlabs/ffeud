@@ -2,14 +2,14 @@ import React from "react"
 
 let Header = React.createClass({
   render() {
-    let { team_1_score, team_2_score, round_info } = this.props
+    let { team_1_name, team_2_name, team_1_score, team_2_score, round_info } = this.props
 
     return (
       <div>
         <div className="points-and-pot">
           <div className="team-left">
             <div className="team-name">
-              Team 1:
+              { team_1_name }
             </div>
             <div className="team-score">
               { team_1_score }
@@ -21,7 +21,7 @@ let Header = React.createClass({
           </div>
           <div className="team-right">
             <div className="team-name">
-              Team 2:
+              { team_2_name }
             </div>
             <div className="team-score">
               { team_2_score }

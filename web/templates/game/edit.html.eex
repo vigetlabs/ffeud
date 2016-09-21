@@ -1,0 +1,23 @@
+<h1>Edit Game</h1>
+
+<%= form_for @conn, game_path(@conn, :update, @game), [name: :game, method: :put], fn f -> %>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <%= text_input f, :name, value: @game.name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Team 1 Name</label>
+    <%= text_input f, :team_1_name, value: @game.team_1_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Team 2 Name</label>
+    <%= text_input f, :team_2_name, value: @game.team_2_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Update", class: "btn btn-primary" %>
+    <%= link "Cancel", to: game_path(@conn, :index), class: "btn btn-default" %>
+  </div>
+<% end %>

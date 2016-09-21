@@ -5,6 +5,14 @@ defmodule FamilyFeud.Actions.EditData do
   alias FamilyFeud.ActiveGame
   alias FamilyFeud.ActiveRound
 
+  def act(game, "team_1_name", value) do
+    Game.update(game, %{team_1_name: value})
+  end
+
+  def act(game, "team_2_name", value) do
+    Game.update(game, %{team_2_name: value})
+  end
+
   def act(game, "team_" <> id, value) do
     active_game = active_game_for(game)
 
