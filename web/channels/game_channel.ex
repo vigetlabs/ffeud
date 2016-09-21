@@ -4,6 +4,7 @@ defmodule FamilyFeud.GameChannel do
   alias FamilyFeud.Game
   alias FamilyFeud.GameState
   alias FamilyFeud.ActionHandler
+  alias FamilyFeud.NoiseCheck
 
   def join("game:" <> game_id, %{"token" => token}, socket) do
     socket = assign(socket, :user, token)
@@ -19,6 +20,8 @@ defmodule FamilyFeud.GameChannel do
 
   def handle_in("act", params = %{"action" => action}, socket) do
     ActionHandler.handle(action, socket.assigns[:game], params)
+    noise = NoiseCheck.check(action, params)
+    if noise, do: broadcast_noise(socket, noise)
     broadcast_state(socket)
     {:noreply, socket}
   end
@@ -27,9 +30,21 @@ defmodule FamilyFeud.GameChannel do
     broadcast! socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
   end
 
-  intercept ["state"]
+  def broadcast_noise(socket, noise) do
+    broadcast! socket, "noise", %{noise: noise}
+  end
+
+  intercept ["state", "noise"]
   def handle_out("state", packet, socket) do
     push socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
+    {:noreply, socket}
+  end
+
+  def handle_out("noise", packet, socket) do
+    if socket.assigns[:user] == "public" do
+      push socket, "noise", packet
+    end
+
     {:noreply, socket}
   end
 end

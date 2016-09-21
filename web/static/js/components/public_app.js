@@ -22,8 +22,19 @@ let PublicApp = React.createClass({
 
   componentDidMount() {
     this.props.channel.on("state", payload => {
-      console.log(payload)
       this.setState(payload)
+    })
+
+    this.props.channel.on("noise", payload => {
+      if (payload.noise == "strike") {
+        new Audio("/audio/strike.mp3").play()
+      } else if (payload.noise == "right-first") {
+        new Audio("/audio/right-first.mp3").play()
+      } else if (payload.noise == "right") {
+        let a = new Audio("/audio/right.mp3")
+        a.volume = 0.4
+        a.play()
+      }
     })
 
     this.props.channel.join()
