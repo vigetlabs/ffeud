@@ -1,1 +1,7 @@
 <div id="socket-app" data-identifier="public" data-game="<%= @game.id %>"></div>
+
+<span id="soundboard"
+  data-strike      = "<%= static_path(@conn, "/audio/strike.mp3") %>"
+  data-right       = "<%= static_path(@conn, "/audio/right.mp3") %>"
+  data-right-first = "<%= static_path(@conn, "/audio/right-first.mp3") %>">
+</span>

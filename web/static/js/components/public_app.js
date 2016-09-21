@@ -25,13 +25,18 @@ let PublicApp = React.createClass({
       this.setState(payload)
     })
 
+    let soundboard = $("#soundboard")
+
     this.props.channel.on("noise", payload => {
       if (payload.noise == "strike") {
-        new Audio("/audio/strike.mp3").play()
+        let path = soundboard.data("strike")
+        new Audio(path).play()
       } else if (payload.noise == "right-first") {
-        new Audio("/audio/right-first.mp3").play()
+        let path = soundboard.data("right-first")
+        new Audio(path).play()
       } else if (payload.noise == "right") {
-        let a = new Audio("/audio/right.mp3")
+        let path = soundboard.data("right")
+        let a = new Audio(path)
         a.volume = 0.4
         a.play()
       }
