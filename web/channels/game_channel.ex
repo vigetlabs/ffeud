@@ -26,6 +26,12 @@ defmodule FamilyFeud.GameChannel do
     {:noreply, socket}
   end
 
+  def handle_in("silent_act", params = %{"action" => action}, socket) do
+    ActionHandler.handle(action, socket.assigns[:game], params)
+    push socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
+    {:noreply, socket}
+  end
+
   def broadcast_state(socket) do
     broadcast! socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
   end

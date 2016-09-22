@@ -47,11 +47,17 @@ defmodule FamilyFeud.Game do
   end
 
   def ordered_rounds(game) do
-    query = from r in Round,
-      where:    r.game_id == ^game.id,
-      order_by: r.position
+    round_query = from r in Round,
+      where: r.game_id == ^game.id
 
-    Repo.all query
+    fast_money_round_query = from r in FastMoneyRound,
+      where: r.game_id == ^game.id
+
+    all_rounds = Repo.all(round_query) ++ Repo.all(fast_money_round_query)
+
+    Enum.sort all_rounds, fn(r1, r2) ->
+      r1.position < r2.position
+    end
   end
 
   def random_code do

@@ -21,15 +21,26 @@ defmodule FamilyFeud.ActiveGame do
   end
 
   def get_active_round(active_game, round \\ nil) do
-    game         = Repo.get(Game, active_game.game_id)
-    round        = round || Game.first_round(game)
-    active_round = Repo.get_by(ActiveRound, active_game_id: active_game.id, active: true)
+    game            = Repo.get(Game, active_game.game_id)
+    round           = round || Game.first_round(game)
+    active_round    =
+      Repo.get_by(ActiveRound, active_game_id: active_game.id, active: true) ||
+      Repo.get_by(ActiveFastMoneyRound, active_game_id: active_game.id, active: true)
 
     if !active_round do
-      {:ok, active_round} = ActiveRound.create(active_game, round)
+      case round do
+        %Round{} ->
+          {:ok, active_round} = ActiveRound.create(active_game, round)
 
-      if round == Game.ordered_rounds(game) |> List.last do
-        ActiveRound.update(active_round, %{last_round: true})
+          if round == Game.ordered_rounds(game) |> List.last do
+            ActiveRound.update(active_round, %{last_round: true})
+          end
+        %FastMoneyRound{} ->
+          {:ok, active_round} = ActiveFastMoneyRound.create(active_game, round)
+
+          if round == Game.ordered_rounds(game) |> List.last do
+            ActiveFastMoneyRound.update(active_round, %{last_round: true})
+          end
       end
     end
 

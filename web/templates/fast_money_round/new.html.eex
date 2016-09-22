@@ -1,0 +1,21 @@
+<h1>New Fast Money Round for <%= @game.name %></h1>
+
+<%= form_for @conn, game_fast_money_round_path(@conn, :create, @game.id), [name: :fast_money_round], fn f -> %>
+  <div class="form-group">
+    <label for="question">Notes</label>
+    <%= textarea f, :notes, class: "form-control" %>
+    <span class="hint">
+      Use this to record questions and their answers. It will be visible to the admin when playing the game.
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="position">Position</label>
+    <%= number_input f, :position, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Create", class: "btn btn-primary" %>
+    <%= link "Cancel", to: game_path(@conn, :show, @game), class: "btn btn-default" %>
+  </div>
+<% end %>

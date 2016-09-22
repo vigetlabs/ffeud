@@ -3,6 +3,7 @@
 @import 'colors';
 
 @import 'header';
+@import 'fast_money';
 @import 'strikes';
 @import 'answers';
 
@@ -23,4 +24,9 @@
   min-width: 800px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.hint {
+  font-style: italic;
+  color: $dark-grey;
 }

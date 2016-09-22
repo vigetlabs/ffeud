@@ -1,12 +1,14 @@
-import React   from "react"
-import Header  from "./admin/header.js"
-import Answers from "./admin/answers.js"
-import Strikes from "./admin/strikes.js"
-import Actions from "./admin/actions.js"
+import React     from "react"
+import Header    from "./admin/header.js"
+import Answers   from "./admin/answers.js"
+import FastMoney from "./admin/fast_money.js"
+import Strikes   from "./admin/strikes.js"
+import Actions   from "./admin/actions.js"
 
 let AdminApp = React.createClass({
   getInitialState() {
     return {
+      round_type: "regular",
       team_1_name: "",
       team_2_name: "",
       team_1_score: 0,
@@ -39,14 +41,24 @@ let AdminApp = React.createClass({
   },
 
   render() {
-    return (
-      <div>
-        <Header  channel={ this.props.channel } { ...this.state } />
-        <Answers channel={ this.props.channel } { ...this.state } />
-        <Strikes channel={ this.props.channel } { ...this.state } />
-        <Actions channel={ this.props.channel } { ...this.state } />
-      </div>
-    )
+    if (this.state.round_type == "regular") {
+      return (
+        <div>
+          <Header  channel={ this.props.channel } { ...this.state } />
+          <Answers channel={ this.props.channel } { ...this.state } />
+          <Strikes channel={ this.props.channel } { ...this.state } />
+          <Actions channel={ this.props.channel } { ...this.state } />
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <Header    channel={ this.props.channel } { ...this.state } />
+          <FastMoney channel={ this.props.channel } { ...this.state } />
+          <Actions   channel={ this.props.channel } { ...this.state } />
+        </div>
+      )
+    }
   }
 })
 

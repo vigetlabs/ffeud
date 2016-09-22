@@ -2,8 +2,10 @@ defmodule FamilyFeud.Actions.DolePoints do
   alias FamilyFeud.Repo
   alias FamilyFeud.Game
   alias FamilyFeud.Round
+  alias FamilyFeud.FastMoneyRound
   alias FamilyFeud.ActiveGame
   alias FamilyFeud.ActiveRound
+  alias FamilyFeud.ActiveFastMoneyRound
 
   def act(game, team) do
     active_game   = active_game_for(game)
@@ -17,7 +19,7 @@ defmodule FamilyFeud.Actions.DolePoints do
     end
 
     ActiveGame.update(active_game, params)
-    ActiveRound.update(active_round, %{pot: 0})
+    zero_out_pot(active_round)
   end
 
   def active_game_for(game) do
@@ -29,8 +31,20 @@ defmodule FamilyFeud.Actions.DolePoints do
   end
 
   def round_for(active_round) do
-    Round
-    |> Repo.get(active_round.round_id)
-    |> Repo.preload(:answers)
+    case active_round do
+      %ActiveRound{} ->
+        Repo.get(Round, active_round.round_id)
+      %ActiveFastMoneyRound{} ->
+        Repo.get(FastMoneyRound, active_round.fast_money_round_id)
+    end
+  end
+
+  def zero_out_pot(active_round) do
+    case active_round do
+      %ActiveRound{} ->
+        ActiveRound.update(active_round, %{pot: 0})
+      %ActiveFastMoneyRound{} ->
+        ActiveFastMoneyRound.update(active_round, %{pot: 0})
+    end
   end
 end

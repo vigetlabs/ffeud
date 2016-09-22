@@ -17,9 +17,10 @@ defmodule FamilyFeud.Router do
     resources "/games", GameController do
       get "/play", PlayController, :admin
       resources "/rounds", RoundController do
-        resources "/answers", AnswerController do
-        end
+        resources "/answers", AnswerController
       end
+
+      resources "/fast_money_rounds", FastMoneyRoundController
     end
 
     resources "/registrations", RegistrationController,

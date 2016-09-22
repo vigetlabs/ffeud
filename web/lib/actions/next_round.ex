@@ -2,8 +2,10 @@ defmodule FamilyFeud.Actions.NextRound do
   alias FamilyFeud.Repo
   alias FamilyFeud.Game
   alias FamilyFeud.Round
+  alias FamilyFeud.FastMoneyRound
   alias FamilyFeud.ActiveGame
   alias FamilyFeud.ActiveRound
+  alias FamilyFeud.ActiveFastMoneyRound
 
   def act(game) do
     # find next round
@@ -18,7 +20,7 @@ defmodule FamilyFeud.Actions.NextRound do
     round_index = ordered_rounds |> Enum.find_index(fn(r) -> r == round end)
     next_round  = ordered_rounds |> Enum.at(round_index + 1)
 
-    ActiveRound.update(active_round, %{active: false})
+    deactivate_round(active_round)
     ActiveGame.get_active_round(active_game, next_round)
   end
 
@@ -35,6 +37,20 @@ defmodule FamilyFeud.Actions.NextRound do
   end
 
   def current_round_for(active_round) do
-    Repo.get(Round, active_round.round_id)
+    case active_round do
+      %ActiveRound{} ->
+        Repo.get(Round, active_round.round_id)
+      %ActiveFastMoneyRound{} ->
+        Repo.get(FastMoneyRound, active_round.fast_money_round_id)
+    end
+  end
+
+  def deactivate_round(active_round) do
+    case active_round do
+      %ActiveRound{} ->
+        ActiveRound.update(active_round, %{active: false})
+      %ActiveFastMoneyRound{} ->
+        ActiveFastMoneyRound.update(active_round, %{active: false})
+    end
   end
 end

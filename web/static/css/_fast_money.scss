@@ -1,0 +1,65 @@
+.fast-money-inputs {
+  display: flex;
+  margin-top: 15px;
+
+  button {
+    background: lightgreen;
+
+    &:disabled {
+      background: lightgrey;
+    }
+  }
+
+  .fm-answers {
+    width: 30%;
+    margin-right: 5px;
+
+    input {
+      width: 100%;
+      margin-bottom: 5px;
+      @media screen and (max-width: 434px) {
+        margin-bottom: 36px;
+      }
+    }
+  }
+
+  .fm-points {
+    max-width: 40px;
+    width: 15%;
+    margin-right: 5px;
+
+    input {
+      width: 100%;
+      margin-bottom: 5px;
+      @media screen and (max-width: 434px) {
+        margin-bottom: 36px;
+      }
+    }
+  }
+
+  .fm-show-actions {
+    width: 205px;
+
+    .answer-button {
+      width: 105px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      height: 26px;
+    }
+
+    .points-button {
+      width: 95px;
+      height: 26px;
+      margin-bottom: 5px;
+    }
+  }
+
+  .fm-show-points {
+    width: 95px;
+
+    button {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+  }
+}

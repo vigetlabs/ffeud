@@ -24,9 +24,11 @@ defmodule FamilyFeud.Web do
       alias FamilyFeud.Repo
       alias FamilyFeud.Game
       alias FamilyFeud.Round
+      alias FamilyFeud.FastMoneyRound
       alias FamilyFeud.Answer
       alias FamilyFeud.ActiveGame
       alias FamilyFeud.ActiveRound
+      alias FamilyFeud.ActiveFastMoneyRound
 
       import Ecto
       import Ecto.Changeset

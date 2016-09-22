@@ -11,27 +11,38 @@
 <% else %>
   <ul>
     <%= @rounds |> Enum.map fn round -> %>
-      <li>
+      <%= if round.__struct__ == FamilyFeud.Round do %>
+        <li>
+          <div>
+            <%= round.question %> (<%= link "Edit", to: game_round_path(@conn, :edit, @game, round) %>)
+          </div>
+          <div style="margin-bottom: 20px;">
+            <b>Answers:</b>
+            <%= if Enum.any? Round.ordered_answers(round) do %>
+              <ul class="no-margin">
+                <%= Round.ordered_answers(round) |> Enum.map fn answer -> %>
+                  <li>
+                    <%= answer.body %> (<%= answer.points %>)
+                    (<%= link "Edit", to: game_round_answer_path(@conn, :edit, @game, round, answer) %>)
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+        </li>
         <div>
-          <%= round.question %> (<%= link "Edit", to: game_round_path(@conn, :edit, @game, round) %>)
+          <%= link "Add Answer", to: game_round_answer_path(@conn, :new, @game, round), class: "btn btn-sm btn-default" %>
         </div>
-        <div style="margin-bottom: 20px;">
-          <b>Answers:</b>
-          <%= if Enum.any? Round.ordered_answers(round) do %>
-            <ul class="no-margin">
-              <%= Round.ordered_answers(round) |> Enum.map fn answer -> %>
-                <li>
-                  <%= answer.body %> (<%= answer.points %>)
-                  (<%= link "Edit", to: game_round_answer_path(@conn, :edit, @game, round, answer) %>)
-                </li>
-              <% end %>
-            </ul>
-          <% end %>
-        </div>
-      </li>
-      <div>
-        <%= link "Add Answer", to: game_round_answer_path(@conn, :new, @game, round), class: "btn btn-sm btn-default" %>
-      </div>
+      <% else %>
+        <li>
+          <div>
+            Fast Money Round (<%= link "Edit", to: game_fast_money_round_path(@conn, :edit, @game, round) %>)
+          </div>
+          <div style="white-space: pre-wrap;">
+            <%= round.notes %>
+          </div>
+        </li>
+      <% end %>
       <br>
     <% end %>
   </ul>
@@ -39,7 +50,10 @@
 
 <div style="margin-bottom: 10px;">
   <%= link "Add a Round", to: game_round_path(@conn, :new, @game), class: "btn btn-default" %>
+  <%= link "Add a Fast Money Round", to: game_fast_money_round_path(@conn, :new, @game), class: "btn btn-default" %>
   <%= if Enum.any? @rounds do %>
+    <br>
+    <br>
     <%= link "Play!", to: game_play_path(@conn, :admin, @game), class: "btn btn-success" %>
   <% end %>
 </div>

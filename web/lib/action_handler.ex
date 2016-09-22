@@ -26,4 +26,13 @@ defmodule FamilyFeud.ActionHandler do
   def handle("edit_data", game, %{"field" => field, "value" => value}) do
     FamilyFeud.Actions.EditData.act(game, field, value)
   end
+
+  def handle("fm_store", game, %{"type" => type, "index" => index, "value" => value}) do
+    FamilyFeud.Actions.FmStore.act(game, type, index, value)
+  end
+
+  def handle("fm_show", game, %{"type" => type, "index" => index}) do
+    FamilyFeud.Actions.FmShow.act(game, type, index)
+  end
+
 end
