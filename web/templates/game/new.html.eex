@@ -8,12 +8,12 @@
 
   <div class="form-group">
     <label for="name">Team 1 Name</label>
-    <%= text_input f, :team_1_name, class: "form-control" %>
+    <%= text_input f, :team_1_name, value: "Team 1", class: "form-control" %>
   </div>
 
   <div class="form-group">
     <label for="name">Team 2 Name</label>
-    <%= text_input f, :team_2_name, class: "form-control" %>
+    <%= text_input f, :team_2_name, value: "Team 2", class: "form-control" %>
   </div>
 
   <div class="form-group">
