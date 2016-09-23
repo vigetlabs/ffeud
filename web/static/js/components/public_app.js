@@ -39,6 +39,15 @@ let PublicApp = React.createClass({
         let a = new Audio(path)
         a.volume = 0.4
         a.play()
+      } else if (payload.noise == "fm-answer") {
+        let path = soundboard.data("fm-answer")
+        new Audio(path).play()
+      } else if (payload.noise == "fm-bell") {
+        let path = soundboard.data("fm-bell")
+        new Audio(path).play()
+      } else if (payload.noise == "fm-strike") {
+        let path = soundboard.data("fm-strike")
+        new Audio(path).play()
       }
     })
 

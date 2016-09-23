@@ -20,7 +20,7 @@ defmodule FamilyFeud.GameChannel do
 
   def handle_in("act", params = %{"action" => action}, socket) do
     ActionHandler.handle(action, socket.assigns[:game], params)
-    noise = NoiseCheck.check(action, params)
+    noise = NoiseCheck.check(action, params, socket.assigns[:game])
     if noise, do: broadcast_noise(socket, noise)
     broadcast_state(socket)
     {:noreply, socket}

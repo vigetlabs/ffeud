@@ -3,5 +3,8 @@
 <span id="soundboard"
   data-strike      = "<%= static_path(@conn, "/audio/strike.mp3") %>"
   data-right       = "<%= static_path(@conn, "/audio/right.mp3") %>"
-  data-right-first = "<%= static_path(@conn, "/audio/right-first.mp3") %>">
+  data-right-first = "<%= static_path(@conn, "/audio/right-first.mp3") %>"
+  data-fm-answer   = "<%= static_path(@conn, "/audio/fm-answer.wav") %>"
+  data-fm-bell     = "<%= static_path(@conn, "/audio/fm-bell.wav") %>"
+  data-fm-strike   = "<%= static_path(@conn, "/audio/fm-strike.wav") %>">
 </span>
