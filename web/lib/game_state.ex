@@ -57,7 +57,7 @@ defmodule FamilyFeud.GameState do
       round_info:   %{
         pot:          active_round.pot,
         notes:        round.notes,
-        answers:      active_round.answers,
+        answers:      get_fast_money_answers(active_round, access),
         answer_state: active_round.answer_state,
         points:       active_round.points,
         point_state:  active_round.point_state,
@@ -83,6 +83,27 @@ defmodule FamilyFeud.GameState do
         %{
           used: false
         }
+      end
+    end
+  end
+
+  def get_fast_money_answers(active_round, access) do
+    if access == "admin" do
+      active_round.answers
+    else
+      Enum.map 0..5, fn(index) ->
+        if Enum.at(active_round.answer_state, index) do
+          points = if Enum.at(active_round.point_state, index), do: Enum.at(active_round.points, index) || 0
+          %{
+            used:   true,
+            body:   Enum.at(active_round.answers, index),
+            points: points
+          }
+        else
+          %{
+            used: false
+          }
+        end
       end
     end
   end
