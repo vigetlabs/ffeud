@@ -38,12 +38,7 @@ defmodule FamilyFeud.Game do
   end
 
   def first_round(game) do
-    query = from r in Round,
-      where:    r.game_id == ^game.id,
-      order_by: r.position,
-      limit:    1
-
-    Repo.all(query) |> List.first
+    ordered_rounds(game) |> List.first
   end
 
   def ordered_rounds(game) do
