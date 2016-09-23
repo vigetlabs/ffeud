@@ -1,13 +1,21 @@
 import React  from "react"
 
 let FastMoney = React.createClass({
-  componentDidMount() {
+  load_answers() {
     let { answers, points } = this.props.round_info
     let indeces = [0,1,2,3,4]
     indeces.map(function(index) {
       $("#answer-" + index).val(answers[index])
       $("#point-" + index).val(points[index])
     })
+  },
+
+  componentDidMount() {
+    this.load_answers()
+  },
+
+  componentDidUpdate() {
+    this.load_answers()
   },
 
   render() {
