@@ -46,6 +46,17 @@
   border-bottom-right-radius: 20px;
 }
 
+.team-center {
+  text-align: center;
+  border: 1px solid black;
+  width: 25%;
+  height: 125px;
+  background: $red;
+  margin: 0 auto 40px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
 .team-right {
   text-align: center;
   border: 1px solid black;

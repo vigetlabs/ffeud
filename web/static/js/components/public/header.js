@@ -4,6 +4,14 @@ import React from "react"
 
 let Header = React.createClass({
   render() {
+    if (this.props.round_type == "regular") {
+      return this.render_header()
+    } else {
+      return this.render_fast_money_header()
+    }
+  },
+
+  render_header() {
     let { team_1_name, team_2_name, team_1_score, team_2_score, round_info } = this.props
 
     return (
@@ -52,6 +60,23 @@ let Header = React.createClass({
         </div>
         <div className="question">
           { round_info.question }
+        </div>
+      </div>
+    )
+  },
+
+  render_fast_money_header() {
+    let { team_1_name, team_1_score } = this.props
+
+    return (
+      <div>
+        <div className="team-center">
+          <div className="team-name">
+            { team_1_name }
+          </div>
+          <div className="team-score">
+            { team_1_score }
+          </div>
         </div>
       </div>
     )
