@@ -59,7 +59,7 @@ defmodule FamilyFeud.GameController do
      Repo.delete(game)
 
     conn
-    |> put_flash(:info, game.name <> " deleted")
+    |> put_flash(:info, "#{game.name} deleted")
     |> redirect(to: game_path(conn, :index))
   end
 

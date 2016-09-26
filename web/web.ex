@@ -61,7 +61,7 @@ defmodule FamilyFeud.Web do
           value
         else
           key = key |> Atom.to_string |> String.capitalize
-          key <> " " <> value
+          "#{key} #{value}"
         end
       end
     end
