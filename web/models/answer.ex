@@ -23,10 +23,11 @@ defmodule FamilyFeud.Answer do
   end
 
   def validate_8_answer_limit(changeset) do
-    new?  = get_field(changeset, :id) == nil
-    round = Repo.get(Round, get_field(changeset, :round_id)) |> Repo.preload(:answers)
+    round_id = get_field(changeset, :round_id) || -1
+    new?     = get_field(changeset, :id) == nil
 
-    if new? && (round.answers |> Enum.count >= 6) do
+    answers = Repo.all(from a in Answer, where: a.round_id == ^round_id)
+    if new? && (Enum.count(answers) >= 8) do
       add_error(changeset, :base, "Can't create more than 8 answers per round.")
     else
       changeset

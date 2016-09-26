@@ -3,7 +3,7 @@ defmodule FamilyFeud.FastMoneyRoundTest do
 
   alias FamilyFeud.FastMoneyRound
 
-  @valid_attrs %{}
+  @valid_attrs %{game_id: 1, notes: "ya ya ya", position: 3}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

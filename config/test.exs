@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :family_feud, FamilyFeud.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "efatsi",
+  password: "",
   database: "family_feud_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

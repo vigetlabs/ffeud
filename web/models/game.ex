@@ -4,8 +4,8 @@ defmodule FamilyFeud.Game do
   schema "games" do
     field :name, :string
     field :public_code, :string
-    field :team_1_name, :string
-    field :team_2_name, :string
+    field :team_1_name, :string, default: "Team 1"
+    field :team_2_name, :string, default: "Team 2"
     belongs_to :user, User
     has_many :rounds, Round
     has_many :active_games, ActiveGame

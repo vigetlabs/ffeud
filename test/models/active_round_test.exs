@@ -3,7 +3,7 @@ defmodule FamilyFeud.ActiveRoundTest do
 
   alias FamilyFeud.ActiveRound
 
-  @valid_attrs %{active: true, answer_state: "some content", x_count: 42}
+  @valid_attrs %{active: true, pot: 0, answer_state: [], x_count: 42, rebuttal: true, last_round: true, active_game_id: 1, round_id: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
