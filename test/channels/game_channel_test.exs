@@ -45,6 +45,19 @@ defmodule FamilyFeud.GameChannelTest do
         team_2_score: 0
       }
     end
+
+    test "use answer", %{socket: socket} do
+      push socket, "act", %{"action" => "use_answer", "index" => 0}
+
+      assert_push "state", %{
+        round_info: %{
+          answers: [%{
+            body: "First Answer", points: 10, used: true
+          }],
+          pot: 10,
+        }
+      }
+    end
   end
 
   describe "as a public user" do
