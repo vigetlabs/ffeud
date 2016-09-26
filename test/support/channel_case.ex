@@ -21,6 +21,15 @@ defmodule FamilyFeud.ChannelCase do
       use Phoenix.ChannelTest
 
       alias FamilyFeud.Repo
+      alias FamilyFeud.User
+      alias FamilyFeud.Game
+      alias FamilyFeud.Round
+      alias FamilyFeud.FastMoneyRound
+      alias FamilyFeud.Answer
+      alias FamilyFeud.ActiveGame
+      alias FamilyFeud.ActiveRound
+      alias FamilyFeud.ActiveFastMoneyRound
+
       import Ecto
       import Ecto.Changeset
       import Ecto.Query

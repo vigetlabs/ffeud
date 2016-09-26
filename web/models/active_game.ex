@@ -33,13 +33,13 @@ defmodule FamilyFeud.ActiveGame do
           {:ok, active_round} = ActiveRound.create(active_game, round)
 
           if round == Game.ordered_rounds(game) |> List.last do
-            ActiveRound.update(active_round, %{last_round: true})
+            {:ok, active_round} = ActiveRound.update(active_round, %{last_round: true})
           end
         %FastMoneyRound{} ->
           {:ok, active_round} = ActiveFastMoneyRound.create(active_game, round)
 
           if round == Game.ordered_rounds(game) |> List.last do
-            ActiveFastMoneyRound.update(active_round, %{last_round: true})
+            {:ok, active_round} = ActiveFastMoneyRound.update(active_round, %{last_round: true})
           end
       end
     end

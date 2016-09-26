@@ -14,8 +14,8 @@ defmodule FamilyFeud.GameChannel do
   end
 
   def handle_in("load_state", _params, socket) do
-    game_state = GameState.get(socket.assigns[:game], socket.assigns[:user])
-    {:reply, {:ok, game_state}, socket}
+    push socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
+    {:noreply, socket}
   end
 
   def handle_in("act", params = %{"action" => action}, socket) do
