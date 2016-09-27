@@ -17,3 +17,7 @@ config :family_feud, FamilyFeud.Repo,
   database: "family_feud_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Ease up on the password hashing algorithm
+config :comeonin, :bcrypt_log_rounds, 4
+config :comeonin, :pbkdf2_rounds, 1
