@@ -14,7 +14,7 @@ defmodule FamilyFeud.GameChannel do
   end
 
   def handle_in("load_state", _params, socket) do
-    push socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
+    push socket, "state", GameState.generate(socket.assigns[:game], socket.assigns[:user])
     {:noreply, socket}
   end
 
@@ -28,12 +28,12 @@ defmodule FamilyFeud.GameChannel do
 
   def handle_in("silent_act", params = %{"action" => action}, socket) do
     ActionHandler.handle(action, socket.assigns[:game], params)
-    push socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
+    push socket, "state", GameState.generate(socket.assigns[:game], socket.assigns[:user])
     {:noreply, socket}
   end
 
   def broadcast_state(socket) do
-    broadcast! socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
+    broadcast! socket, "state", GameState.generate(socket.assigns[:game], socket.assigns[:user])
   end
 
   def broadcast_noise(socket, noise) do
@@ -42,7 +42,7 @@ defmodule FamilyFeud.GameChannel do
 
   intercept ["state", "noise"]
   def handle_out("state", packet, socket) do
-    push socket, "state", GameState.get(socket.assigns[:game], socket.assigns[:user])
+    push socket, "state", GameState.generate(socket.assigns[:game], socket.assigns[:user])
     {:noreply, socket}
   end
 

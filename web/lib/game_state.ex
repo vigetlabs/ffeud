@@ -7,7 +7,7 @@ defmodule FamilyFeud.GameState do
   alias FamilyFeud.ActiveRound
   alias FamilyFeud.ActiveFastMoneyRound
 
-  def get(game, access) do
+  def generate(game, access) do
     game         = Repo.get(Game, game.id)
     active_game  = Game.get_active_game(game)
     active_round = ActiveGame.get_active_round(active_game)
