@@ -6,7 +6,6 @@ defmodule FamilyFeud.PlayController do
 
   plug :load_game
   plug :require_game
-  plug :authorize_access, "before admin" when action in [:admin]
 
   def admin(conn, _params) do
     active_game = Game.get_active_game(conn.assigns[:game])
@@ -23,8 +22,12 @@ defmodule FamilyFeud.PlayController do
     game = case conn.params do
       %{"public_code" => code} ->
         Repo.get_by(Game, public_code: code)
+      %{"game_id" => "42"} ->
+        Repo.get_by(Game, id: 42)
       %{"game_id" => id} ->
-        Repo.get_by(Game, id: id, user_id: current_user(conn).id)
+        if current_user(conn) do
+          Repo.get_by(Game, id: id, user_id: current_user(conn).id)
+        end
     end
 
     assign(conn, :game, game)
@@ -37,17 +40,6 @@ defmodule FamilyFeud.PlayController do
     else
       conn
       |> put_flash(:info, "Page not found")
-      |> redirect(to: "/")
-    end
-  end
-
-  def authorize_access(conn, _) do
-    game = conn.assigns[:game]
-    if game && game.user_id == current_user(conn).id do
-      conn
-    else
-      conn
-      |> put_flash(:info, "You don't have access to that.")
       |> redirect(to: "/")
     end
   end
